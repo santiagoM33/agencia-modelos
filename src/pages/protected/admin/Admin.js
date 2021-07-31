@@ -145,16 +145,16 @@ class Admin extends React.Component {
                         </Nav>
                         <TabContent activeTab={activeTab}>
                             <TabPane tabId="1">
-                                <Pending pending={pending} toggleModal={this.toggleModal}/>
+                                <Pending pending={pending} user={user} toggleModal={this.toggleModal}/>
                             </TabPane>
                             <TabPane tabId="2">
-                                <Approved approved={approved} toggleModal={this.toggleModal}/>
+                                <Approved approved={approved} user={user} toggleModal={this.toggleModal}/>
                             </TabPane>
                             <TabPane tabId="3">
-                                <Rejected rejected={rejected} toggleModal={this.toggleModal}/>
+                                <Rejected rejected={rejected} user={user} toggleModal={this.toggleModal}/>
                             </TabPane>
                             <TabPane tabId="4">
-                                <Banned banned={banned} toggleModal={this.toggleModal}/>
+                                <Banned banned={banned} user={user} toggleModal={this.toggleModal}/>
                             </TabPane>
                         </TabContent>
                         <ModalAdminManager 
