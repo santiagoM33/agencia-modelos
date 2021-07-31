@@ -5,12 +5,12 @@ import ModalAdmin from './ModalAdmin';
 
 class ModalAdminManager extends React.Component {
     static propTypes = {
-        //isOpen: React.PropTypes.bool,
+        //open: React.PropTypes.bool,
         //onToggleModal: React.PropTypes.func,
     }
     
     static defaultProps = {
-        isOpen: false,
+        open: false,
         onToggleModal: () => { }
     }
 
@@ -24,15 +24,14 @@ class ModalAdminManager extends React.Component {
     }
 
     render() { 
-        //const {toggleModal, isOpen} = this.props;
-        const {modal, toggle} = this.state;
+        const {onToggleModal, open} = this.props;
+        const {modal} = this.state;
         if(!modal) return null;
-        console.log('Props: ', this.props)
+
         return (
             <ModalAdmin 
-                isOpen={modal} 
-                ontoggleModal={toggle}
-                onModal={modal}
+                open={open} 
+                onToggleModal={onToggleModal}
             />
          );
     }

@@ -1,10 +1,10 @@
 import React from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button,Row, Col, Table, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
 import classnames from 'classnames';
 import { getUsers } from '../../../services/connect';
 import ModalAdminManager from './components/ModalAdminManager';
-import Paginated from './components/Paginated';
+
 import Pending from './components/Pending';
 import Approved from './components/Approved';
 import Rejected from './components/Rejected';
@@ -17,7 +17,7 @@ class Admin extends React.Component {
         approved: [],
         rejected: [],
         banned: [],
-        show: false,
+        modal: false,
         currentPage: 1,
         postPerPage: 5,
         totalPages: 0,
@@ -44,8 +44,9 @@ class Admin extends React.Component {
 
 
     /*--------- MODAL------- */
-    toggleShow = () => {
-        this.setState({show: !this.state.show})
+    toggleModal = () => {
+        console.log('Change show')
+        this.setState({modal: !this.state.modal})
     }
 
     handleChange = e =>{
@@ -69,27 +70,12 @@ class Admin extends React.Component {
 
     render() {
         const { user, users } = this.props;
-        const { activeTab, show, currentPage, postPerPage } = this.state;
+        const { activeTab, modal, currentPage, postPerPage } = this.state;
         if (!user || !users.data || !activeTab) return null;
         
-        //let pending = (users.data.filter(p => p.status === 'pending') || Users.data.filter(p => p.status === 'pending'));
-        //let approved = (users.data.filter(a => a.status === 'approved') || Users.data.filter(a => a.status === 'approved'));
-        //let rejected = (users.data.filter(r => r.status === 'rejected') || Users.data.filter(r => r.status === 'rejected'));
-        //let banned = (users.data.filter(b => b.status === 'banned') || Users.data.filter(b => b.status === 'banned'));
+       
 
         /* PAGINATION */
-        /*let itemsRemaining = users.itemsRemaining || Users.itemsRemaining;
-        let pagesRemaining = users.pagesRemaining || Users.pagesRemaining;*/
-
-        //const indexOfLastPost = currentPage * postPerPage;
-        //const indexOfFirstPost = indexOfLastPost - postPerPage;
-        //const currentPosts = users.data.slice(indexOfFirstPost, indexOfLastPost) || Users.data.slice(indexOfFirstPost, indexOfLastPost);
-        
-        /*let pending = currentPosts.filter(a=>a.status === 'pending');
-        let approved = currentPosts.filter(a=>a.status === 'approved');
-        let rejected = currentPosts.filter(a=>a.status === 'rejected');
-        let banned = currentPosts.filter(a=>a.status === 'banned');*/
-
         const {pending, approved, rejected, banned} = this.state;
         if (!pending || !approved || !rejected || !banned) return null;
 
@@ -159,21 +145,21 @@ class Admin extends React.Component {
                         </Nav>
                         <TabContent activeTab={activeTab}>
                             <TabPane tabId="1">
-                                <Pending pending={pending} toggleShow={this.toggleShow}/>
+                                <Pending pending={pending} toggleModal={this.toggleModal}/>
                             </TabPane>
                             <TabPane tabId="2">
-                                <Approved approved={approved} toggleShow={this.toggleShow}/>
+                                <Approved approved={approved} toggleModal={this.toggleModal}/>
                             </TabPane>
                             <TabPane tabId="3">
-                                <Rejected rejected={rejected}/>
+                                <Rejected rejected={rejected} toggleModal={this.toggleModal}/>
                             </TabPane>
                             <TabPane tabId="4">
-                                <Banned banned={banned}/>
+                                <Banned banned={banned} toggleModal={this.toggleModal}/>
                             </TabPane>
                         </TabContent>
                         <ModalAdminManager 
-                            open={show}
-                            onToggleModal={()=> this.setState({show: !show})}
+                            open={modal}
+                            onToggleModal={this.toggleModal}
                             handleChange={this.handleChange}
                             catchUser={this.catchUser}
                         />

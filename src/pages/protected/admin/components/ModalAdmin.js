@@ -21,12 +21,12 @@ class ModalAdmin extends React.Component {
     }
 
     render() {
-        const { isOpen, onToggleModal, onModal } = this.props;
+        const { open, onToggleModal, onModal } = this.props;
         console.log('Props: ', this.props)
         return (
             <>
-                <Modal isOpen={isOpen} toggle={onToggleModal}>
-                    <ModalHeader toggle={onToggleModal}>Update User Info</ModalHeader>
+                <Modal isOpen={open} toggle={()=>onToggleModal()}>
+                    <ModalHeader toggle={()=>onToggleModal()}>Update User Info</ModalHeader>
                     <ModalBody>
                         <Form>
                             <FormGroup>
@@ -68,8 +68,8 @@ class ModalAdmin extends React.Component {
                         </Form> 
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={()=>onToggleModal}>Update</Button>{' '}
-                        <Button color="secondary" onClick={onToggleModal}>Cancel</Button>
+                        <Button color="primary" onClick={()=>onToggleModal()}>Update</Button>{' '}
+                        <Button color="secondary" onClick={()=>onToggleModal()}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
             </>
