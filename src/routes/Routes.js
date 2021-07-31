@@ -7,6 +7,7 @@ import ResetPasswordRequest from '../pages/ResetPasswordRequest';
 import ResetPassword from '../pages/ResetPassword';
 import 'bootstrap/dist/css/bootstrap.css';
 import { getEscorts, getUsers } from '../services/connect';
+import EditUsers from '../pages/protected/admin/pages/EditUsers';
 const Login = React.lazy(() => import('../pages/login/Login'));
 const Register = React.lazy(() => import('../pages/register/Register'));
 const Announce = React.lazy(() => import('../pages/announce/Announce'));
@@ -59,7 +60,6 @@ class Routes extends React.Component {
                     <Switch>
                         <Route exact path='/' render={props => (
                             <Home {...props}
-                                users={users.data}
                                 models={models}
                             />
                         )} 
@@ -71,7 +71,6 @@ class Routes extends React.Component {
                                 <Login {...publicProps}
                                     //user={this.state.user}
                                     handleLogin={this.handleLogin}
-                                    //loggedInStatus={this.state.loggedInStatus}
                                     //fileGrabber={this.fileGrabber}
                                 />
                             )}
@@ -79,7 +78,6 @@ class Routes extends React.Component {
                             <Route exact path="/register" render={ publicProps => (
                                 <Register {...publicProps} 
                                     handleLogin={this.handleLogin} 
-                                    //loggedInStatus={this.state.loggedInStatus}
                                 />
                             )}
                             />
@@ -87,7 +85,6 @@ class Routes extends React.Component {
                                <Announce {...publicProps}
                                     //user={this.state.user}
                                     //handleLogin={this.handleLogin}
-                                    //loggedInStatus={this.state.loggedInStatus}
                                 />
                             )}                         
                             />
@@ -102,14 +99,20 @@ class Routes extends React.Component {
                             />
                             <PrivateRoute exact path="/dashboard" authed={!!user} component={ privateProps => (
                                 <Dashboard {...privateProps}
+                                    //token={this.state.token}
                                     user={user}
-                                    //getUsers={this.getUsers}
                                     //users={this.state.users}
-                                    //loggedInStatus={this.state.loggedInStatus}
+                                    //getUsers={this.getUsers}
                                     //role={this.state.role}
                                     //pagination={this.state.pagination}
-                                    //token={this.state.token}
                                     //handleLogout={this.handleLogout}
+                                />
+                            )}
+                            />  
+                            <PrivateRoute exact path="/users/:userId" authed={!!user} component={ privateProps => (
+                                <EditUsers {...privateProps}
+                                    //token={this.state.token}
+                                    user={user}
                                 />
                             )}
                             />  

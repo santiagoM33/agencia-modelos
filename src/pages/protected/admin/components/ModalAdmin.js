@@ -17,15 +17,17 @@ class ModalAdmin extends React.Component {
     
     handleChange = e => {
         e.persist();
-        this.setState({form:{...this.state.form, [e.target.name]: e.target.value}})
+        this.setState({form:{[e.target.name]: e.target.value}})
     }
 
     render() {
-        const { open, onToggleModal, onModal } = this.props;
-        console.log('Props: ', this.props)
+        const { open, onToggleModal } = this.props;
+        const { form } = this.state;
+        const {id, alias, email, status, roleId} = form;
+        //console.log('alias: ', alias)
         return (
             <>
-                <Modal isOpen={open} toggle={()=>onToggleModal()}>
+                <Modal isOpen={open} toggle={()=>onToggleModal()} fade={false}>
                     <ModalHeader toggle={()=>onToggleModal()}>Update User Info</ModalHeader>
                     <ModalBody>
                         <Form>
@@ -37,7 +39,7 @@ class ModalAdmin extends React.Component {
                                 <Col md={6}>
                                     <FormGroup>
                                         <Label for="alias">Username</Label>
-                                        <Input type="text" name="alias" id="alias" onChange={this.handleChange} placeholder="with a placeholder"/>
+                                        <Input type="text" name="alias" id="alias" onChange={this.handleChange} placeholder="username placeholder"/>
                                     </FormGroup>
                                 </Col>
                                 <Col md={6}>
@@ -68,7 +70,7 @@ class ModalAdmin extends React.Component {
                         </Form> 
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={()=>onToggleModal()}>Update</Button>{' '}
+                        <Button color="primary" onClick={()=>updateUserData(form).then(res=>console.log('Respuesta form',res))}>Update</Button>{' '}
                         <Button color="secondary" onClick={()=>onToggleModal()}>Cancel</Button>
                     </ModalFooter>
                 </Modal>

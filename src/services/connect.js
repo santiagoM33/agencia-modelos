@@ -135,7 +135,7 @@ export const updateStatus = async (id, status) => {
     return promise;
 }
 
-export const updateUserData = async (user) => {
+export const updateUserData = async user => {
     const accessToken = token;
     const requestData = {
         method: 'PUT', 

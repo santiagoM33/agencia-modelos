@@ -22,16 +22,16 @@ class Admin extends React.Component {
         postPerPage: 5,
         totalPages: 0,
         totalItems: 0,
-        loading: false
+        loading: true
     }
 
     controller = new AbortController();
     
     componentDidMount(){
-        getUsers(this.controller.signal).then(res=>this.setState({pending: res.data.filter(a=>a.status === 'pending')}))
-        getUsers(this.controller.signal).then(res=>this.setState({approved: res.data.filter(a=>a.status === 'approved')}))
-        getUsers(this.controller.signal).then(res=>this.setState({rejected: res.data.filter(a=>a.status === 'rejected')}))
-        getUsers(this.controller.signal).then(res=>this.setState({banned: res.data.filter(a=>a.status === 'banned')}))
+        getUsers(this.controller.signal).then(res=>this.setState({pending: res.data.filter(a=>a.status === 'pending'), loading: false}))
+        getUsers(this.controller.signal).then(res=>this.setState({approved: res.data.filter(a=>a.status === 'approved'), loading: false}))
+        getUsers(this.controller.signal).then(res=>this.setState({rejected: res.data.filter(a=>a.status === 'rejected'), loading: false}))
+        getUsers(this.controller.signal).then(res=>this.setState({banned: res.data.filter(a=>a.status === 'banned'), loading: false}))
     }
 
     setActiveTab = tab => {
@@ -45,7 +45,6 @@ class Admin extends React.Component {
 
     /*--------- MODAL------- */
     toggleModal = () => {
-        console.log('Change show')
         this.setState({modal: !this.state.modal})
     }
 
@@ -54,7 +53,7 @@ class Admin extends React.Component {
         this.setState({form:{...this.state.form, [e.target.name]: e.target.value}})
     }
     
-    /*catchUser= user => {
+    takeUser= user => {
         this.setState({form:{
             id: user.id, 
             alias: user.alias, 
@@ -62,7 +61,7 @@ class Admin extends React.Component {
             status: user.status, 
             roleId: user.roleId}
         })
-    }*/
+    }
     /*----------------------- */
     /*----------------------- */
     //Verificar como mejorar esto
@@ -70,7 +69,7 @@ class Admin extends React.Component {
 
     render() {
         const { user, users } = this.props;
-        const { activeTab, modal, currentPage, postPerPage } = this.state;
+        const { activeTab, modal, currentPage, postPerPage, loading } = this.state;
         if (!user || !users.data || !activeTab) return null;
         
        
@@ -148,13 +147,13 @@ class Admin extends React.Component {
                                 <Pending pending={pending} user={user} toggleModal={this.toggleModal}/>
                             </TabPane>
                             <TabPane tabId="2">
-                                <Approved approved={approved} user={user} toggleModal={this.toggleModal}/>
+                                <Approved approved={approved} toggleModal={this.toggleModal} loading={loading}/>
                             </TabPane>
                             <TabPane tabId="3">
-                                <Rejected rejected={rejected} user={user} toggleModal={this.toggleModal}/>
+                                <Rejected rejected={rejected} toggleModal={this.toggleModal} loading={loading}/>
                             </TabPane>
                             <TabPane tabId="4">
-                                <Banned banned={banned} user={user} toggleModal={this.toggleModal}/>
+                                <Banned banned={banned} toggleModal={this.toggleModal} loading={loading}/>
                             </TabPane>
                         </TabContent>
                         <ModalAdminManager 
