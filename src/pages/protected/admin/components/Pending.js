@@ -1,9 +1,13 @@
 import React from 'react';
 import { Card, Button, Row, Col, Table } from 'reactstrap';
-import { updateStatus } from '../../../../services/connect';
+import { updateStatus, getUsers } from '../../../../services/connect';
 
 class Pending extends React.Component {
 
+    componentDidUpdate(prevProps, prevState) {
+        console.log('prevProps: ', prevProps.pending)
+        console.log('prevState: ', prevState)
+    }
 
     goToAdmin = () => {
         const { history } = this.props;
@@ -31,7 +35,7 @@ class Pending extends React.Component {
                             <td>{status.alias}</td>
                             <td>{status.email}</td>
                             <td>{status.status}</td>
-                            <td className='text-center'>
+                            <td className='text-center d-flex'>
                                 <Button className="btn btn-success" onClick={
                                     () => updateStatus(status.id, { status: 'approved' }).then(res=>console.log('RES: ',res))
                                 }>
@@ -65,11 +69,11 @@ class Pending extends React.Component {
                         <Table responsive>
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th className='text-center'>#</th>
                                     <th>Alias</th>
                                     <th>Email</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th className='text-center'>Status</th>
+                                    <th className='text-center'>Action</th>
                                 </tr>
                             </thead>
                             <tbody>

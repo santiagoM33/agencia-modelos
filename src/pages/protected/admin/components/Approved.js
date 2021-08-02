@@ -50,11 +50,11 @@ class Approved extends React.Component {
                         <Table responsive>
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th className='text-center'>#</th>
                                     <th>Alias</th>
                                     <th>Email</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th className='text-center'>Status</th>
+                                    <th className='text-center'>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
