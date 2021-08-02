@@ -64,10 +64,10 @@ class Routes extends React.Component {
                             />
                         )} 
                         />
-                        <Route exact path='/reset-password-request' component={ResetPasswordRequest}/>
-                        <PublicRoute exact path='/reset-password' component={ResetPassword}/>
+                        <Route exact path='/reset-password-request' render={ResetPasswordRequest}/>
+                        <PublicRoute exact path='/reset-password' render={ResetPassword}/>
                         <React.Suspense fallback={<p>Loading...</p>}>
-                            <Route exact path="/login" render={ publicProps => (
+                            <Route exact path="/login" component={ publicProps => (
                                 <Login {...publicProps}
                                     //user={this.state.user}
                                     handleLogin={this.handleLogin}
@@ -75,13 +75,13 @@ class Routes extends React.Component {
                                 />
                             )}
                             />
-                            <Route exact path="/register" render={ publicProps => (
+                            <Route exact path="/register" component={ publicProps => (
                                 <Register {...publicProps} 
                                     handleLogin={this.handleLogin} 
                                 />
                             )}
                             />
-                            <Route exact path="/announce" render={ publicProps => (
+                            <Route exact path="/announce" component={ publicProps => (
                                <Announce {...publicProps}
                                     //user={this.state.user}
                                     //handleLogin={this.handleLogin}
@@ -112,7 +112,8 @@ class Routes extends React.Component {
                             <PrivateRoute exact path="/users/:userId" authed={!!user} component={ privateProps => (
                                 <EditUsers {...privateProps}
                                     //token={this.state.token}
-                                    user={user}
+                                    //user={user}
+                                    users={users}
                                 />
                             )}
                             />  

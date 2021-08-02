@@ -147,8 +147,7 @@ export const updateUserData = async user => {
         body: JSON.stringify(user)
         
     }
-    //console.log('Request Data: ', requestData.body)
-    //console.log('Request Data Type: ', typeof user)
+
     const promise = new Promise(async (response, reject) => {
         try{
             const res = await fetch(`${BASE_URI}/users/${user.id}`, requestData)

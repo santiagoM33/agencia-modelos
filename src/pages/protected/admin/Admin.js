@@ -3,7 +3,6 @@ import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
 import classnames from 'classnames';
 import { getUsers } from '../../../services/connect';
-import ModalAdminManager from './components/ModalAdminManager';
 
 import Pending from './components/Pending';
 import Approved from './components/Approved';
@@ -69,7 +68,7 @@ class Admin extends React.Component {
 
     render() {
         const { user, users } = this.props;
-        const { activeTab, modal, currentPage, postPerPage, loading } = this.state;
+        const { activeTab, modal, loading } = this.state;
         if (!user || !users.data || !activeTab) return null;
         
        
@@ -97,7 +96,7 @@ class Admin extends React.Component {
             })
         }*/
 
-        
+        const {history} = this.props;
         
         return (
             <article className='container'>
@@ -144,24 +143,18 @@ class Admin extends React.Component {
                         </Nav>
                         <TabContent activeTab={activeTab}>
                             <TabPane tabId="1">
-                                <Pending pending={pending} user={user} toggleModal={this.toggleModal}/>
+                                <Pending pending={pending} user={user} history={history}/>
                             </TabPane>
                             <TabPane tabId="2">
-                                <Approved approved={approved} toggleModal={this.toggleModal} loading={loading}/>
+                                <Approved approved={approved} loading={loading}/>
                             </TabPane>
                             <TabPane tabId="3">
-                                <Rejected rejected={rejected} toggleModal={this.toggleModal} loading={loading}/>
+                                <Rejected rejected={rejected} loading={loading}/>
                             </TabPane>
                             <TabPane tabId="4">
-                                <Banned banned={banned} toggleModal={this.toggleModal} loading={loading}/>
+                                <Banned banned={banned} loading={loading}/>
                             </TabPane>
                         </TabContent>
-                        <ModalAdminManager 
-                            open={modal}
-                            onToggleModal={this.toggleModal}
-                            handleChange={this.handleChange}
-                            catchUser={this.catchUser}
-                        />
                     </div>
                 </div>
             </article>

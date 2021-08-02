@@ -63,6 +63,7 @@ class Header extends React.Component {
                                 handleLogout={handleLogout}/>
                 break;
             case '/admin':
+            case `/users/:userId`:
                 component = <header className='border-bottom border-danger'>
                 <div className="navbar navbar-expand-lg navbar-light bg-light">
                     <h1>
