@@ -52,15 +52,6 @@ class Admin extends React.Component {
         this.setState({form:{...this.state.form, [e.target.name]: e.target.value}})
     }
     
-    takeUser= user => {
-        this.setState({form:{
-            id: user.id, 
-            alias: user.alias, 
-            email: user.email, 
-            status: user.status, 
-            roleId: user.roleId}
-        })
-    }
     /*----------------------- */
     /*----------------------- */
     //Verificar como mejorar esto
@@ -68,7 +59,7 @@ class Admin extends React.Component {
 
     render() {
         const { user, users } = this.props;
-        const { activeTab, modal, loading } = this.state;
+        const { activeTab, loading } = this.state;
         if (!user || !users.data || !activeTab) return null;
         
        
@@ -95,6 +86,9 @@ class Admin extends React.Component {
                 getUsers(this.controller.signal).then(res=>this.setState({Users: res}))
             })
         }*/
+
+        /*----------------------- */
+        /*----------------------- */
 
         const {history} = this.props;
         
@@ -143,7 +137,7 @@ class Admin extends React.Component {
                         </Nav>
                         <TabContent activeTab={activeTab}>
                             <TabPane tabId="1">
-                                <Pending pending={pending} user={user} history={history}/>
+                                <Pending pending={pending} history={history}/>
                             </TabPane>
                             <TabPane tabId="2">
                                 <Approved approved={approved} loading={loading}/>

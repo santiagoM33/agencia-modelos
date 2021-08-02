@@ -4,7 +4,7 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 class ProtectedHeader extends React.Component {
     state = {  }
     render() { 
-        const {history, handleLogout} =  this.props;
+        const {history, handleLogout, user} =  this.props;
         if(!history || !handleLogout) return null;
         return ( 
             <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
@@ -12,7 +12,9 @@ class ProtectedHeader extends React.Component {
                 <nav className="my-2 my-md-0 mr-md-3">
                     <Link className="p-2 text-dark" to="/gallery">Gallery</Link>
                     <Link className="p-2 text-dark" to="/publish">Publish</Link>
-                    <Link className="p-2 text-dark" to="/admin">Admin</Link>
+                    {user.roleId === 1 && 
+                        <Link className="p-2 text-dark" to="/admin">Admin</Link>
+                    }
                     <Link className="p-2 text-dark" to="/profile">Profile</Link>
                 </nav>
                 <NavLink className='btn btn-outline-primary' to='/login'
