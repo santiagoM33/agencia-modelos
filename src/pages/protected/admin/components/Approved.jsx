@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Table } from 'reactstrap';
+import Paginated from './Paginated';
+
 
 class Approved extends React.Component {
     state = {}
@@ -64,7 +66,7 @@ class Approved extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                {/*<Paginated paginate={paginate} prevPage={prevPage} nextPage={nextPage} indexOfFirstPost={indexOfFirstPost} postPerPage={postPerPage} pagesRemaining={pagesRemaining} itemsRemaining={itemsRemaining}/>*/}
+                <Paginated />
             </>
 
         );

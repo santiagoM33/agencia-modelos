@@ -1,4 +1,5 @@
 import React from 'react';
+import './Admin.css';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
 import classnames from 'classnames';
@@ -88,10 +89,7 @@ class Admin extends React.Component {
         }*/
 
         /*----------------------- */
-        /*----------------------- */
-
-        const {history} = this.props;
-        
+        /*----------------------- */        
         return (
             <article className='container'>
                 <h3 className='mt-3'>Admin</h3>
@@ -137,7 +135,7 @@ class Admin extends React.Component {
                         </Nav>
                         <TabContent activeTab={activeTab}>
                             <TabPane tabId="1">
-                                <Pending pending={pending} history={history}/>
+                                <Pending pending={pending}/>
                             </TabPane>
                             <TabPane tabId="2">
                                 <Approved approved={approved} loading={loading}/>

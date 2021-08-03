@@ -1,4 +1,5 @@
 import React from 'react';
+import './Dashboard.css'
 import HeaderCard from './components/HeaderCard';
 
 class Dashboard extends React.Component {
@@ -10,34 +11,56 @@ class Dashboard extends React.Component {
         return ( 
             <article className='container'>
                 <h3>Dashboard</h3>
-                <div className='row statistics-card'>
+                <div className='Row statistics-card'>
                     <HeaderCard 
                         textColor='white'
                         bgColor='primary'
-                        cardHeader='AM'
-                        cardTitle='Visitas'
-                        cardText='Hoy tuvo 250 visitas nuevas en su perfil'
+                        cardHeader='Perfil'
+                        cardText='250 visitas nuevas'
                     />
                     <HeaderCard 
                         textColor='white'
                         bgColor='success'
-                        cardHeader='AM'
-                        cardTitle='Follow'
-                        cardText='Hoy tuvo 25 seguidores nuevos en su perfil'
+                        cardHeader='Instagram'
+                        cardText='25 seguidores nuevo'
                     />
                     <HeaderCard 
                         textColor='white'
                         bgColor='danger'
-                        cardHeader='AM'
-                        cardTitle='Follow'
-                        cardText='Hoy tuvo 25 seguidores nuevos en su perfil'
+                        cardHeader='Foto destacada'
+                        cardText='20 min/prom miradas'
                     />
                     <HeaderCard 
                         textColor='white'
                         bgColor='secondary'
-                        cardHeader='AM'
-                        cardTitle='Follow'
-                        cardText='Hoy tuvo 25 seguidores nuevos en su perfil'
+                        cardHeader='Mensajes'
+                        cardText='5 mensajes nuevos'
+                    />
+                </div>
+                <div className='Row statistics-card'>
+                    <HeaderCard 
+                        textColor='white'
+                        bgColor='primary'
+                        cardHeader='Perfil'
+                        cardText='250 visitas nuevas'
+                    />
+                    <HeaderCard 
+                        textColor='white'
+                        bgColor='success'
+                        cardHeader='Instagram'
+                        cardText='25 seguidores nuevo'
+                    />
+                    <HeaderCard 
+                        textColor='white'
+                        bgColor='danger'
+                        cardHeader='Foto destacada'
+                        cardText='20 min/prom miradas'
+                    />
+                    <HeaderCard 
+                        textColor='white'
+                        bgColor='secondary'
+                        cardHeader='Mensajes'
+                        cardText='5 mensajes nuevos'
                     />
                 </div>
             </article>

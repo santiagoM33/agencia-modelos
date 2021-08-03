@@ -1,0 +1,33 @@
+.Row {
+    /*--bs-gutter-x:1.5rem;*/
+    --bs-gutter-y:0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    /*margin-left: calc(var(--bs-gutter-x) * -.1);
+    margin-right: calc(var(--bs-gutter-x) * -.1);*/
+    /*margin: calc(var(--bs-gutter-y) * -1) calc(var(--bs-gutter-x) * -.1);*/
+  }
+
+  .Col-6 {
+    flex: 0 0 auto;
+    width: 46%;
+    margin: 5px;
+  }
+
+  .Card{
+    padding-left: .7rem;
+    padding-right: .7rem;
+    max-width: 50rem;
+  }
+
+  .CardHeader {
+    padding: .5rem .3rem;
+  }
+
+  .CardBody {
+    padding: .4rem 0;
+    padding-top: .2rem;
+    padding-bottom: .6rem;
+  }
+  
