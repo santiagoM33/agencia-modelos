@@ -6,8 +6,8 @@ class Rejected extends React.Component {
     state = {}
 
     showRejected = () => {
-        const {rejected} = this.props;
-        if(rejected.length === 0) return null;
+        const {data} = this.props.rejected;
+        if(!data) return null;
         return (
             <React.Fragment>
                 {this.props.loading
@@ -19,7 +19,7 @@ class Rejected extends React.Component {
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
                 </div>
-                : <>{rejected.map(status => {
+                : <>{data.map(status => {
                     return (
                         <tr key={status.id}>
                             <th scope="row">{status.id}</th>
@@ -62,7 +62,7 @@ class Rejected extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                {/*<Paginated />*/}
+                {/*<Navegation />*/}
             </>
 
         );

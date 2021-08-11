@@ -12,6 +12,7 @@
     left: 0;
     top: 0; 
     animation: sk-chase-dot 2.0s infinite ease-in-out both; 
+    color: red;
   }
   
   .sk-chase-dot:before {
@@ -19,7 +20,7 @@
     display: block;
     width: 25%;
     height: 25%;
-    background-color: #fff;
+    background-color: #000;
     border-radius: 100%;
     animation: sk-chase-dot-before 2.0s infinite ease-in-out both; 
   }
@@ -51,4 +52,14 @@
     } 100%, 0% {
       transform: scale(1.0); 
     } 
+  }
+
+  li.nav-item {
+    user-select: none;
+  }
+
+  li.nav-item > .active{
+    background-color: red !important;
+    color: #fff !important;
+    user-select: none;
   }

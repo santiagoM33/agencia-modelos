@@ -1,18 +1,47 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Table } from 'reactstrap';
-import Paginated from './Paginated';
+import Navegation from './Navegation';
 
 
 class Approved extends React.Component {
-    state = {}
+
+    state = {
+        pendingItemsRemaining: this.props.approved.itemsRemaining,
+        pendingPagesRemaining: this.props.approved.pagesRemaining
+    }
+
+    prevPage = () => {
+        const { getUserApproved, currentPage  } = this.props
+        let offset = currentPage * this.props.limit;
+        if(currentPage === 1) return null;
+        currentPage-=1;
+        offset -= 5;
+        this.setState({currentPage, offset}, () => {
+            //getUserApproved()
+        })
+    }
+
+    nextPage = () => {
+        const { getUserApproved, currentPage  } = this.props
+        let offset = currentPage * this.props.limit;
+        let lastPage = this.state.pendingPagesRemaining;
+        if(currentPage === lastPage) return null;
+        currentPage++;
+        offset += 5;
+        this.setState({currentPage, offset}, () => {
+            //getUserApproved()
+            console.log('Anda??')
+        })
+    }
     
     showApproved = () => {
-        const {approved } = this.props;
-        if(approved.length === 0) return null;
+        const { loading, approved } = this.props;
+        const { data } = approved;
+        if(!data) return null;
         return (
             <React.Fragment>
-                {this.props.loading
+                {loading
                 ? <div class="sk-chase">
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
@@ -21,7 +50,7 @@ class Approved extends React.Component {
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
                 </div>
-                : <>{approved.map(status => {
+                : <>{data.map(status => {
                     return (
                         <tr key={status.id}>
                             <th scope="row">{status.id}</th>
@@ -42,9 +71,17 @@ class Approved extends React.Component {
         )
     }
 
+    //Change Page
+   
+
 
     render() {
-        
+        const { pendingItemsRemaining, pendingPagesRemaining } = this.state;
+        const { approved, nextPage, prevPage } = this.props;
+        //const indexOfLastItem = currentPage * itemsPerPage;
+        //const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+        /*console.log('pendingItemsRemaining: ', pendingItemsRemaining)
+        console.log('pendingPagesRemaining: ', pendingPagesRemaining)*/
         return (
             <><Row>
                 <Col sm="12">
@@ -66,7 +103,11 @@ class Approved extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                <Paginated />
+                <Navegation 
+                    approved={approved} 
+                    prevPage={this.prevPage}
+                    nextPage={this.nextPage}
+                />
             </>
 
         );

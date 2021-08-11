@@ -1,10 +1,7 @@
 import React from 'react';
 import './Admin.css';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
-
 import classnames from 'classnames';
-import { getUsers } from '../../../services/connect';
-
 import Pending from './components/Pending';
 import Approved from './components/Approved';
 import Rejected from './components/Rejected';
@@ -18,20 +15,6 @@ class Admin extends React.Component {
         rejected: [],
         banned: [],
         modal: false,
-        currentPage: 1,
-        postPerPage: 5,
-        totalPages: 0,
-        totalItems: 0,
-        loading: true
-    }
-
-    controller = new AbortController();
-    
-    componentDidMount(){
-        getUsers(this.controller.signal).then(res=>this.setState({pending: res.data.filter(a=>a.status === 'pending'), loading: false}))
-        getUsers(this.controller.signal).then(res=>this.setState({approved: res.data.filter(a=>a.status === 'approved'), loading: false}))
-        getUsers(this.controller.signal).then(res=>this.setState({rejected: res.data.filter(a=>a.status === 'rejected'), loading: false}))
-        getUsers(this.controller.signal).then(res=>this.setState({banned: res.data.filter(a=>a.status === 'banned'), loading: false}))
     }
 
     setActiveTab = tab => {
@@ -45,51 +28,26 @@ class Admin extends React.Component {
 
     /*--------- MODAL------- */
     toggleModal = () => {
-        this.setState({modal: !this.state.modal})
+        this.setState({ modal: !this.state.modal })
     }
 
-    handleChange = e =>{
+    handleChange = e => {
         e.persist();
-        this.setState({form:{...this.state.form, [e.target.name]: e.target.value}})
+        this.setState({ form: { ...this.state.form, [e.target.name]: e.target.value } })
     }
-    
+
     /*----------------------- */
     /*----------------------- */
     //Verificar como mejorar esto
     //componentWillUnmount(){this.controller.abort()}
 
     render() {
-        const { user, users } = this.props;
-        const { activeTab, loading } = this.state;
-        if (!user || !users.data || !activeTab) return null;
+        const { setActiveTab } = this;
+        const { user, users, loading, prevPage, nextPage, currentPage, limit, getUserApproved  } = this.props;
+        if (!user || !users) return null;
+        const { pending, approved, rejected, banned } = users;
+        const { activeTab } = this.state;
         
-       
-
-        /* PAGINATION */
-        const {pending, approved, rejected, banned} = this.state;
-        if (!pending || !approved || !rejected || !banned) return null;
-
-        /*const paginate = pageNum => this.setState({currentPage: pageNum})
-        const nextPage = () => {
-            let currentPage = Number(this.state.currentPage);
-            const {totalPages} = this.state;
-            if(currentPage === totalPages) return null;
-            currentPage+=1;
-            this.setState({currentPage}, () =>{
-                getUsers(this.controller.signal).then(res=>this.setState({Users: res}))
-            })
-        }
-        const prevPage = () => {
-            let currentPage = Number(this.state.currentPage);
-            if(currentPage === 1) return null;
-            currentPage -= 1;
-            this.setState({currentPage}, () => {
-                getUsers(this.controller.signal).then(res=>this.setState({Users: res}))
-            })
-        }*/
-
-        /*----------------------- */
-        /*----------------------- */        
         return (
             <article className='container'>
                 <h3 className='mt-3'>Admin</h3>
@@ -100,7 +58,7 @@ class Admin extends React.Component {
                                 <NavLink
                                     className={classnames(`p-2 p-sm-4 p-md-5`, { active: activeTab === '1' })}
                                     onClick={() => { this.toggleTab('1'); }}
-                                    style={{cursor: "pointer"}}
+                                    style={{ cursor: "pointer" }}
                                 >
                                     Pending
                                 </NavLink>
@@ -109,7 +67,7 @@ class Admin extends React.Component {
                                 <NavLink
                                     className={classnames(`p-2 p-sm-4 p-md-5`, { active: activeTab === '2' })}
                                     onClick={() => { this.toggleTab('2'); }}
-                                    style={{cursor: "pointer"}}
+                                    style={{ cursor: "pointer" }}
                                 >
                                     Approved
                                 </NavLink>
@@ -118,7 +76,7 @@ class Admin extends React.Component {
                                 <NavLink
                                     className={classnames(`p-2 p-sm-4 p-md-5`, { active: activeTab === '3' })}
                                     onClick={() => { this.toggleTab('3'); }}
-                                    style={{cursor: "pointer"}}
+                                    style={{ cursor: "pointer" }}
                                 >
                                     Rejected
                                 </NavLink>
@@ -127,7 +85,7 @@ class Admin extends React.Component {
                                 <NavLink
                                     className={classnames(`p-2 p-sm-4 p-md-5`, { active: activeTab === '4' })}
                                     onClick={() => { this.toggleTab('4'); }}
-                                    style={{cursor: "pointer"}}
+                                    style={{ cursor: "pointer" }}
                                 >
                                     Banned
                                 </NavLink>
@@ -135,23 +93,31 @@ class Admin extends React.Component {
                         </Nav>
                         <TabContent activeTab={activeTab}>
                             <TabPane tabId="1">
-                                <Pending pending={pending}/>
+                                <Pending pending={pending} />
                             </TabPane>
                             <TabPane tabId="2">
-                                <Approved approved={approved} loading={loading}/>
+                                <Approved approved={approved} 
+                                          loading={loading} 
+                                          currentPage={currentPage} 
+                                          limit={limit} 
+                                          setActiveTab={setActiveTab} 
+                                          getUserApproved={getUserApproved } 
+                                          nextPage={nextPage} 
+                                          prevPage={prevPage}
+                                />
                             </TabPane>
                             <TabPane tabId="3">
-                                <Rejected rejected={rejected} loading={loading}/>
+                                <Rejected rejected={rejected} loading={loading} />
                             </TabPane>
                             <TabPane tabId="4">
-                                <Banned banned={banned} loading={loading}/>
+                                <Banned banned={banned} loading={loading} />
                             </TabPane>
                         </TabContent>
                     </div>
                 </div>
             </article>
         );
-        
+
     }
 }
 

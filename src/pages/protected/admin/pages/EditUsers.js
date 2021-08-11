@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { updateUserData, getUsers } from '../../../../services/connect';
+import { getUsersById, updateUserData } from '../../../../services/connect';
 import { Col, Row, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 class EditUsers extends React.Component {
@@ -11,8 +11,11 @@ class EditUsers extends React.Component {
             email: '',
             status: '',
             roleId: '',
+            userData: {}
         }
     }
+
+    //controller = new AbortController();
 
     handleChange = e => {
         e.persist();
@@ -20,8 +23,6 @@ class EditUsers extends React.Component {
     }
 
     editUser = (userUpdate, id) => {
-        const { data } = this.props.users;
-        if(!data) return null;
         const form = {
             id: Number(id),
             alias: userUpdate.alias,
@@ -29,23 +30,31 @@ class EditUsers extends React.Component {
             status: userUpdate.status,
             roleId: userUpdate.roleId
         }
+
         updateUserData(form).then(res=>{
-            getUsers().then(res=>this.setState({pending: res.data.filter(a=>a.status === 'pending')}))
-            getUsers().then(res=>this.setState({approved: res.data.filter(a=>a.status === 'approved')}))
-            getUsers().then(res=>this.setState({rejected: res.data.filter(a=>a.status === 'rejected')}))
-            getUsers().then(res=>this.setState({banned: res.data.filter(a=>a.status === 'banned')}))
+            const {getUserPending, getUserApproved, getUserRejected, getUserBanned} = this.props;
+            getUserPending()
+            getUserApproved()
+            getUserRejected()
+            getUserBanned()
             this.props.history.push('/admin')
         })
+    }
 
+    getUserData = () => {
+        const {userId} = this.props.match.params;
+        getUsersById(userId).then(userData=>this.setState({userData}))
+    }
+
+    componentDidMount(){
+        this.getUserData()
     }
 
     render() {
-        const { form } = this.state;
-        const { data } = this.props.users;
-        if(!data) return null;
-        //const { id, alias, email, status, roleId } = form;
-        const {userId} = this.props.match.params;
-        const USER = data.find(el=>el.id === Number(userId))   
+        const { form, userData } = this.state;
+        if(!userData) return null;
+        const { id, alias, email, status, roleId } = userData;
+
         return (
             <article className='container'>
                 <h3 className='mt-3'>Update Users Info</h3>
@@ -54,25 +63,25 @@ class EditUsers extends React.Component {
                         <Form>
                             <FormGroup>
                                 <Label for="id" hidden>ID</Label>
-                                <Input type="text" name="id" id="id" className='text-center' readOnly defaultValue={USER.id}/>
+                                <Input type="text" name="id" id="id" className='text-center' readOnly defaultValue={id}/>
                             </FormGroup>
                             <Row form>
                                 <Col md={6}>
                                     <FormGroup>
                                         <Label for="alias">Username</Label>
-                                        <Input type="text" name="alias" id="alias" onChange={this.handleChange} defaultValue={USER.alias} />
+                                        <Input type="text" name="alias" id="alias" onChange={this.handleChange} defaultValue={alias}/>
                                     </FormGroup>
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup>
                                         <Label for="email">Email</Label>
-                                        <Input type="email" name="email" id="email" onChange={this.handleChange} defaultValue={USER.email} />
+                                        <Input type="email" name="email" id="email" onChange={this.handleChange} defaultValue={email}/>
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <FormGroup>
                                 <Label for="status">Status</Label>
-                                <Input type="select" name="status" id="status" onChange={this.handleChange} defaultValue={{ label:USER.status, value:USER.status }}>
+                                <Input type="select" name="status" id="status" onChange={this.handleChange} defaultValue={status}>
                                     <option>pending</option>
                                     <option>approved</option>
                                     <option>rejected</option>
@@ -82,13 +91,13 @@ class EditUsers extends React.Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="roleId">Role</Label>
-                                <Input type="select" name="roleId" id="roleId" onChange={this.handleChange} defaultValue={USER.roleId}>
+                                <Input type="select" name="roleId" id="roleId" onChange={this.handleChange} defaultValue={roleId}>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
                                 </Input>
                             </FormGroup>
-                            <Button className='btn' color='primary' onClick={()=>this.editUser(form,userId)}>Update</Button>
+                            <Button className='btn' color='primary' onClick={()=>this.editUser(form,id)}>Update</Button>
                             <Link to='/admin' className='btn btn-secondary'>Cancel</Link>
                         </Form>
                     </div>

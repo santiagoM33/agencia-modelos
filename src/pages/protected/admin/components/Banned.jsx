@@ -6,8 +6,8 @@ class Banned extends React.Component {
     state = {}
 
     showBanned = () => {
-        const {banned} = this.props;
-        if(banned.length === 0) return null;
+        const {data} = this.props.banned;
+        if(!data) return null;
         return (
             <React.Fragment>
                 {this.props.loading
@@ -19,7 +19,7 @@ class Banned extends React.Component {
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
                 </div>
-                : <>{banned.map(status => {
+                : <>{data.map(status => {
                     return (
                         <tr key={status.id}>
                             <th scope="row">{status.id}</th>
@@ -62,7 +62,7 @@ class Banned extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                {/*} <Paginated />*/}
+                {/*} <Navegation />*/}
                 {/* : <div className='text-center mt-4'>No hay elementos que mostrar</div>}*/}
             </>
 

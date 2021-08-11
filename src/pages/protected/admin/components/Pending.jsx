@@ -6,9 +6,9 @@ import Swal from 'sweetalert2';
 class Pending extends React.Component {
 
     showPending = () => {
-        const {pending} = this.props;
-        if(pending.length === 0) return null;
-   
+        const {data} = this.props.pending;
+        if (!data) return null;
+  
         return (
             <React.Fragment>
                 {this.props.loading
@@ -20,7 +20,7 @@ class Pending extends React.Component {
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
                 </div>
-                : <>{pending.map(status => {
+                : <>{data.map(status => {
                     return (
                         <tr key={status.id}>
                             <th scope="row">{status.id}</th>
@@ -111,7 +111,7 @@ class Pending extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                {/*<Paginated />*/}
+                {/*<Navegation />*/}
             </>
 
         )
