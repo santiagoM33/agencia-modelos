@@ -2,8 +2,38 @@ import React from 'react';
 import { Card, Button, Row, Col, Table } from 'reactstrap';
 import { updateStatus } from '../../../../services/connect';
 import Swal from 'sweetalert2';
+import NavegationPending from './NavegationPending';
 
 class Pending extends React.Component {
+
+    state = {
+        pendingItemsRemaining: this.props.pending.itemsRemaining,
+        pendingPagesRemaining: this.props.pending.pagesRemaining,
+    }
+    
+
+    prevPage = () => {
+        const { setPaginatePending } = this.props;
+        let currentPage = this.props.currentPage;
+        let offset = currentPage * this.props.limit;
+        if(currentPage < 0) return null;
+        if(offset < 0) return null;
+        currentPage-=1;
+        offset -= 5;
+        setPaginatePending(currentPage, offset)
+    }
+
+    nextPage = () => {
+        //const { approvedPagesRemaining } = this.state;
+        const { setPaginatePending } = this.props;
+        let currentPage = this.props.currentPage;
+        let offset = currentPage * this.props.limit;
+        //let lastPage = approvedPagesRemaining;
+        //if(currentPage === lastPage) return null;
+        currentPage++;
+        offset += 5;
+        setPaginatePending(currentPage, offset)
+    }
 
     showPending = () => {
         const {data} = this.props.pending;
@@ -90,6 +120,8 @@ class Pending extends React.Component {
     }
 
     render() {
+        const {pendingPagesRemaining} = this.state;
+        const {pending, currentPage, limit} = this.props;
         return (
             <><Row>
                 <Col sm="12">
@@ -111,7 +143,15 @@ class Pending extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                {/*<Navegation />*/}
+                {//!!pendingPagesRemaining && 
+                    <NavegationPending
+                        pending={pending} 
+                        currentPage={currentPage}
+                        limit={limit}
+                        prevPage={this.prevPage}
+                        nextPage={this.nextPage}
+                    />
+                }
             </>
 
         )

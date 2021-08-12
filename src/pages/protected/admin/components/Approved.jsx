@@ -1,38 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Table } from 'reactstrap';
-import Navegation from './Navegation';
+import NavegationApproved from './NavegationApproved';
 
 
 class Approved extends React.Component {
 
     state = {
-        pendingItemsRemaining: this.props.approved.itemsRemaining,
-        pendingPagesRemaining: this.props.approved.pagesRemaining
+        approvedItemsRemaining: this.props.approved.itemsRemaining,
+        approvedPagesRemaining: this.props.approved.pagesRemaining,
     }
+    
 
     prevPage = () => {
-        const { getUserApproved, currentPage  } = this.props
+        const { setPaginateApproved } = this.props;
+        let currentPage = this.props.currentPage;
         let offset = currentPage * this.props.limit;
-        if(currentPage === 1) return null;
+        if(currentPage < 0) return null;
+        if(offset < 0) return null;
         currentPage-=1;
         offset -= 5;
-        this.setState({currentPage, offset}, () => {
-            //getUserApproved()
-        })
+        setPaginateApproved(currentPage, offset)
     }
 
     nextPage = () => {
-        const { getUserApproved, currentPage  } = this.props
+        //const { approvedPagesRemaining } = this.state;
+        const { setPaginateApproved } = this.props;
+        let currentPage = this.props.currentPage;
         let offset = currentPage * this.props.limit;
-        let lastPage = this.state.pendingPagesRemaining;
-        if(currentPage === lastPage) return null;
+        //let lastPage = approvedPagesRemaining;
+        //if(currentPage === lastPage) return null;
         currentPage++;
         offset += 5;
-        this.setState({currentPage, offset}, () => {
-            //getUserApproved()
-            console.log('Anda??')
-        })
+        setPaginateApproved(currentPage, offset)
     }
     
     showApproved = () => {
@@ -76,12 +76,12 @@ class Approved extends React.Component {
 
 
     render() {
-        const { pendingItemsRemaining, pendingPagesRemaining } = this.state;
-        const { approved, nextPage, prevPage } = this.props;
-        //const indexOfLastItem = currentPage * itemsPerPage;
-        //const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-        /*console.log('pendingItemsRemaining: ', pendingItemsRemaining)
-        console.log('pendingPagesRemaining: ', pendingPagesRemaining)*/
+        const { approvedPagesRemaining } = this.state;
+        const { approved, currentPage, limit } = this.props;
+        if(!approved.data) return null;
+        //const indexOfLastItem = (currentPage + 1) * limit;
+        //const indexOfFirstItem = indexOfLastItem - limit;
+      
         return (
             <><Row>
                 <Col sm="12">
@@ -103,11 +103,15 @@ class Approved extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                <Navegation 
-                    approved={approved} 
-                    prevPage={this.prevPage}
-                    nextPage={this.nextPage}
-                />
+                {!!approvedPagesRemaining && 
+                    <NavegationApproved 
+                        approved={approved}
+                        currentPage={currentPage}
+                        limit={limit}
+                        prevPage={this.prevPage}
+                        nextPage={this.nextPage}
+                    />
+                }
             </>
 
         );

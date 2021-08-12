@@ -1,9 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Table } from 'reactstrap';
+import NavegationBanned from './NavegationBanned';
 
 class Banned extends React.Component {
-    state = {}
+    
+    state = {
+        bannedItemsRemaining: this.props.banned.itemsRemaining,
+        bannedPagesRemaining: this.props.banned.pagesRemaining,
+    }
+    
+
+    prevPage = () => {
+        const { setPaginateBanned } = this.props;
+        let currentPage = this.props.currentPage;
+        let offset = currentPage * this.props.limit;
+        if(currentPage < 0) return null;
+        if(offset < 0) return null;
+        currentPage-=1;
+        offset -= 5;
+        setPaginateBanned(currentPage, offset)
+    }
+
+    nextPage = () => {
+        //const { approvedPagesRemaining } = this.state;
+        const { setPaginateBanned } = this.props;
+        let currentPage = this.props.currentPage;
+        let offset = currentPage * this.props.limit;
+        //let lastPage = approvedPagesRemaining;
+        //if(currentPage === lastPage) return null;
+        currentPage++;
+        offset += 5;
+        setPaginateBanned(currentPage, offset)
+    }
 
     showBanned = () => {
         const {data} = this.props.banned;
@@ -41,6 +70,8 @@ class Banned extends React.Component {
     }
 
     render() {
+        const { bannedPagesRemaining } = this.state;
+        const { banned, currentPage, limit } = this.props;
         return (
             <><Row>
                 <Col sm="12">
@@ -62,7 +93,16 @@ class Banned extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                {/*} <Navegation />*/}
+                {//!!bannedPagesRemaining &&
+                    <NavegationBanned 
+                        banned={banned} 
+                        currentPage={currentPage}
+                        limit={limit}
+                        prevPage={this.prevPage}
+                        nextPage={this.nextPage}
+                    />
+                
+                }
                 {/* : <div className='text-center mt-4'>No hay elementos que mostrar</div>}*/}
             </>
 

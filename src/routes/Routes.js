@@ -30,14 +30,23 @@ class Routes extends React.Component {
             user,
             token,
             pending: {},
+            currentPagePending: 0,
+            limitPending: 5,
+            offsetPending: 0,
             approved: {},
+            currentPageApproved: 0,
+            limitApproved: 5,
+            offsetApproved: 0,
             rejected: {},
+            currentPageRejected: 0,
+            limitRejected: 5,
+            offsetRejected: 0,
             banned: {},
+            currentPageBanned: 0,
+            limitBanned: 5,
+            offsetBanned: 0,
             models: [],
             loading: true,
-            limit: 5,
-            offset: 0,
-            currentPage: 0,
             lastPage: 0
          }
     }
@@ -47,8 +56,8 @@ class Routes extends React.Component {
     getUserPending = () => {
         const data = {
             status: 'pending',
-            limit: this.state.limit,
-            offset: this.state.offset
+            limit: this.state.limitPending,
+            offset: this.state.offsetPending
         }
         getUsers(this.controller.signal, data).then(pending => this.setState({ pending, loading: false }))
     }
@@ -56,8 +65,8 @@ class Routes extends React.Component {
     getUserApproved = () => {
         const data = {
             status: 'approved',
-            limit: this.state.limit,
-            offset: this.state.offset
+            limit: this.state.limitApproved,
+            offset: this.state.offsetApproved
         }
         getUsers(this.controller.signal, data).then(approved => this.setState({ approved, loading: false }))
     }
@@ -65,8 +74,8 @@ class Routes extends React.Component {
     getUserRejected = () => {
         const data = {
             status: 'rejected',
-            limit: this.state.limit,
-            offset: this.state.offset
+            limit: this.state.limitRejected,
+            offset: this.state.offsetRejected
         }
         getUsers(this.controller.signal, data).then(rejected => this.setState({ rejected, loading: false }))
     }
@@ -74,8 +83,8 @@ class Routes extends React.Component {
     getUserBanned = () => {
         const data = {
             status: 'banned',
-            limit: this.state.limit,
-            offset: this.state.offset
+            limit: this.state.limitBanned,
+            offset: this.state.offsetBanned
         }
         getUsers(this.controller.signal, data).then(banned => this.setState({ banned, loading: false }))
     }
@@ -90,34 +99,21 @@ class Routes extends React.Component {
 
     /* ----------------- PAGINATE SECTION  --------------------- */
 
-    setCurrentPage = currentPage => this.setState({currentPage})
-    setLastPage = page => {
-        //let lastPage = currentPage * itemsPerPage;
-        //this.setState({lastPage})
-    }
+    setPaginateApproved = (currentPageApproved, offsetApproved) => this.setState({currentPageApproved, offsetApproved}, () => {
+        this.getUserApproved()
+    })
 
-    prevPage = () => {
-        let currentPage =  this.state.currentPage;
-        let offset = this.state.offset;
-        if(currentPage === 1) return null;
-        currentPage-=1;
-        offset -= 5;
-        this.setState({currentPage, offset}, () => {
-            this.getUserApproved()
-        })
-    }
+    setPaginatePending = (currentPagePending, offsetPending) => this.setState({currentPagePending, offsetPending}, () => {
+        this.getUserPending()
+    })
 
-    nextPage = () => {
-        let currentPage =  this.state.currentPage;
-        let offset = this.state.offset;
-        //let lastPage = this.state.lastPage;
-        //if(currentPage === lastPage) return null;
-        currentPage++;
-        offset += 5;
-        this.setState({currentPage, offset}, () => {
-            this.getUserApproved()
-        })
-    }
+    setPaginateRejected = (currentPageRejected, offsetRejected) => this.setState({currentPageRejected, offsetRejected}, () => {
+        this.getUserRejected()
+    })
+
+    setPaginateBanned = (currentPageBanned, offsetBanned) => this.setState({currentPageBanned, offsetBanned}, () => {
+        this.getUserBanned()
+    })
 
     /* -------------------- -------- ----------------------- */
     /* -------------------- -------- ----------------------- */
@@ -139,8 +135,11 @@ class Routes extends React.Component {
     //componentWillUnmount(){this.controller.abort()}
 
     render() { 
-        const {getUserPending, getUserApproved, getUserRejected, getUserBanned} = this;
-        const {user, models, token, pending, approved, rejected, banned, loading, currentPage, limit } = this.state;
+        const { getUserPending, getUserApproved, getUserRejected, getUserBanned, 
+        setPaginateApproved, setPaginatePending, setPaginateRejected, setPaginateBanned } = this;
+        const { user, models, token, pending, approved, rejected, banned, loading, 
+        currentPageApproved, currentPagePending, currentPageRejected, currentPageBanned,
+        limitApproved, limitPending, limitRejected, limitBanned } = this.state;
         const users = {
             pending,
             approved,
@@ -148,7 +147,6 @@ class Routes extends React.Component {
             banned
         }
         
-        //console.log('Approved: ', approved)
         return ( 
             <BrowserRouter>
                <Header authed={!!user} user={user} handleLogout={this.handleLogout} />
@@ -189,12 +187,27 @@ class Routes extends React.Component {
                                     user={user}
                                     users={users}
                                     loading={loading}
-                                    currentPage={currentPage}
-                                    limit={limit}
-                                    prevPage={this.prevPage}
-                                    nextPage={this.nextPage}
-                                    getUserApproved={getUserApproved }
-                                    setCurrentPage={this.setCurrentPage}
+                                    
+                                    currentPagePending={currentPagePending}
+                                    currentPageApproved={currentPageApproved}
+                                    currentPageRejected={currentPageRejected}
+                                    currentPageBanned={currentPageBanned}
+                                    
+                                    limitApproved={limitApproved}
+                                    limitPending={limitPending}
+                                    limitRejected={limitRejected}
+                                    limitBanned={limitBanned}
+
+                                    setPaginateApproved={setPaginateApproved}
+                                    setPaginatePending={setPaginatePending}
+                                    setPaginateRejected={setPaginateRejected}
+                                    setPaginateBanned={setPaginateBanned}
+
+                                    getUserApproved={getUserApproved}
+                                    getUserPending={getUserPending}
+                                    getUserRejected={getUserRejected}
+                                    getUserBanned={getUserBanned}
+                                    
                                     loggedInStatus={this.state.loggedInStatus}
                                     handleLogout={this.handleLogout}
                                 />

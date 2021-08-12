@@ -1,9 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Table } from 'reactstrap';
+import NavegationRejected from './NavegationRejected';
 
 class Rejected extends React.Component {
-    state = {}
+    
+    state = {
+        rejectedItemsRemaining: this.props.rejected.itemsRemaining,
+        rejectedPagesRemaining: this.props.rejected.pagesRemaining,
+    }
+    
+
+    prevPage = () => {
+        const { setPaginateRejected } = this.props;
+        let currentPage = this.props.currentPage;
+        let offset = currentPage * this.props.limit;
+        if(currentPage < 0) return null;
+        if(offset < 0) return null;
+        currentPage-=1;
+        offset -= 5;
+        setPaginateRejected(currentPage, offset)
+    }
+
+    nextPage = () => {
+        //const { approvedPagesRemaining } = this.state;
+        const { setPaginateRejected } = this.props;
+        let currentPage = this.props.currentPage;
+        let offset = currentPage * this.props.limit;
+        //let lastPage = approvedPagesRemaining;
+        //if(currentPage === lastPage) return null;
+        currentPage++;
+        offset += 5;
+        setPaginateRejected(currentPage, offset)
+    }
 
     showRejected = () => {
         const {data} = this.props.rejected;
@@ -41,6 +70,8 @@ class Rejected extends React.Component {
     }
 
     render() {
+        const {rejectedPagesRemaining} = this.state;
+        const {rejected, currentPage, limit} = this.props;
         return (
             <><Row>
                 <Col sm="12">
@@ -62,7 +93,15 @@ class Rejected extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                {/*<Navegation />*/}
+                {!!rejectedPagesRemaining &&
+                    <NavegationRejected 
+                        rejected={rejected}
+                        currentPage={currentPage}
+                        limit={limit}
+                        prevPage={this.prevPage}
+                        nextPage={this.nextPage}
+                    />
+                }
             </>
 
         );

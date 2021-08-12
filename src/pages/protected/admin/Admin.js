@@ -17,9 +17,7 @@ class Admin extends React.Component {
         modal: false,
     }
 
-    setActiveTab = tab => {
-        this.setState({ activeTab: tab })
-    }
+    setActiveTab = tab => this.setState({ activeTab: tab })
 
     toggleTab = tab => {
         if (this.state.activeTab !== tab) this.setActiveTab(tab)
@@ -27,9 +25,7 @@ class Admin extends React.Component {
 
 
     /*--------- MODAL------- */
-    toggleModal = () => {
-        this.setState({ modal: !this.state.modal })
-    }
+    toggleModal = () => this.setState({ modal: !this.state.modal })
 
     handleChange = e => {
         e.persist();
@@ -42,8 +38,13 @@ class Admin extends React.Component {
     //componentWillUnmount(){this.controller.abort()}
 
     render() {
-        const { setActiveTab } = this;
-        const { user, users, loading, prevPage, nextPage, currentPage, limit, getUserApproved  } = this.props;
+        //const { setActiveTab } = this;
+        const { user, users, loading, 
+            currentPagePending, currentPageApproved, currentPageRejected, currentPageBanned, 
+            limitApproved, limitPending, limitRejected, limitBanned,
+            getUserApproved, getUserPending, getUserRejected, getUserBanned,
+            setPaginateApproved, setPaginatePending, 
+            setPaginateRejected, setPaginateBanned } = this.props;
         if (!user || !users) return null;
         const { pending, approved, rejected, banned } = users;
         const { activeTab } = this.state;
@@ -93,24 +94,40 @@ class Admin extends React.Component {
                         </Nav>
                         <TabContent activeTab={activeTab}>
                             <TabPane tabId="1">
-                                <Pending pending={pending} />
+                                <Pending pending={pending}
+                                         loading={loading} 
+                                         currentPage={currentPagePending} 
+                                         limit={limitPending} 
+                                         getUserPending={getUserPending}
+                                         setPaginatePending={setPaginatePending} 
+                                />
                             </TabPane>
                             <TabPane tabId="2">
                                 <Approved approved={approved} 
                                           loading={loading} 
-                                          currentPage={currentPage} 
-                                          limit={limit} 
-                                          setActiveTab={setActiveTab} 
-                                          getUserApproved={getUserApproved } 
-                                          nextPage={nextPage} 
-                                          prevPage={prevPage}
+                                          currentPage={currentPageApproved} 
+                                          limit={limitApproved} 
+                                          getUserApproved={getUserApproved}
+                                          setPaginateApproved={setPaginateApproved}
                                 />
                             </TabPane>
                             <TabPane tabId="3">
-                                <Rejected rejected={rejected} loading={loading} />
+                                <Rejected rejected={rejected}
+                                          loading={loading} 
+                                          currentPage={currentPageRejected} 
+                                          limit={limitRejected} 
+                                          getUserPending={getUserRejected}
+                                          setPaginatePending={setPaginateRejected} 
+                                />
                             </TabPane>
                             <TabPane tabId="4">
-                                <Banned banned={banned} loading={loading} />
+                                <Banned banned={banned}
+                                        loading={loading} 
+                                        currentPage={currentPageBanned} 
+                                        limit={limitBanned} 
+                                        getUserPending={getUserBanned}
+                                        setPaginateBanned={setPaginateBanned} 
+                                />
                             </TabPane>
                         </TabContent>
                     </div>
