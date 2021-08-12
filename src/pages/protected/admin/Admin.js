@@ -38,7 +38,7 @@ class Admin extends React.Component {
     //componentWillUnmount(){this.controller.abort()}
 
     render() {
-        //const { setActiveTab } = this;
+        const { setActiveTab } = this;
         const { user, users, loading, 
             currentPagePending, currentPageApproved, currentPageRejected, currentPageBanned, 
             limitApproved, limitPending, limitRejected, limitBanned,
@@ -100,6 +100,7 @@ class Admin extends React.Component {
                                          limit={limitPending} 
                                          getUserPending={getUserPending}
                                          setPaginatePending={setPaginatePending} 
+                                         setActiveTab={setActiveTab}
                                 />
                             </TabPane>
                             <TabPane tabId="2">
@@ -109,6 +110,7 @@ class Admin extends React.Component {
                                           limit={limitApproved} 
                                           getUserApproved={getUserApproved}
                                           setPaginateApproved={setPaginateApproved}
+                                          setActiveTab={setActiveTab}
                                 />
                             </TabPane>
                             <TabPane tabId="3">
