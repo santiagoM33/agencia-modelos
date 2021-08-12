@@ -116,8 +116,8 @@ class Admin extends React.Component {
                                           loading={loading} 
                                           currentPage={currentPageRejected} 
                                           limit={limitRejected} 
-                                          getUserPending={getUserRejected}
-                                          setPaginatePending={setPaginateRejected} 
+                                          getUserRejected={getUserRejected}
+                                          setPaginateRejected={setPaginateRejected} 
                                 />
                             </TabPane>
                             <TabPane tabId="4">
@@ -125,7 +125,7 @@ class Admin extends React.Component {
                                         loading={loading} 
                                         currentPage={currentPageBanned} 
                                         limit={limitBanned} 
-                                        getUserPending={getUserBanned}
+                                        getUserBanned={getUserBanned}
                                         setPaginateBanned={setPaginateBanned} 
                                 />
                             </TabPane>
