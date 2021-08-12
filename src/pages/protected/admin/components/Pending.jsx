@@ -67,12 +67,13 @@ class Pending extends React.Component {
                                             showCancelButton: true,
                                             confirmButtonColor: '#3085d6',
                                             cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Yes, update it!'
+                                            confirmButtonText: 'Yes, approved it!',
+                                            willClose: ()=>this.props.getUserPending()
                                           }).then((result) => {
                                             if (result.isConfirmed) {
                                               Swal.fire(
-                                                'Update!',
-                                                'Your file has been updated.',
+                                                'Approved!',
+                                                'Your file has been approved.',
                                                 'success'
                                                 )
                                             }
@@ -93,11 +94,12 @@ class Pending extends React.Component {
                                             showCancelButton: true,
                                             confirmButtonColor: '#3085d6',
                                             cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Yes, reject it!'
+                                            confirmButtonText: 'Yes, reject it!',
+                                            willClose: ()=>this.props.getUserPending()
                                           }).then((result) => {
                                             if (result.isConfirmed) {
                                               Swal.fire(
-                                                'Banned!',
+                                                'Rejected!',
                                                 'The user has been rejected.',
                                                 'success'
                                               )
