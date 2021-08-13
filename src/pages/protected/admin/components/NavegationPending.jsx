@@ -3,7 +3,7 @@ import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 class NavegationPending extends React.Component {
   render() {
-    const { pending, limit, currentPage, prevPage, nextPage } = this.props;
+    const { pending, currentPage, prevPage, nextPage } = this.props;
     if(!pending) return null;
     const { itemsRemaining, pagesRemaining } = pending;
     if (!itemsRemaining || !pagesRemaining) return null;

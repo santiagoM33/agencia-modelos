@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { getUsersById, updateUserData } from '../../../../services/connect';
+import { getUsersById, getUsersStatus, updateUserData } from '../../../../services/connect';
 import { Col, Row, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 class EditUsers extends React.Component {
@@ -15,7 +15,14 @@ class EditUsers extends React.Component {
         }
     }
 
-    //controller = new AbortController();
+    controller = new AbortController();
+
+    updateData = () => {
+        const dataPending = {
+            status: 'pending',
+        }
+        getUsersStatus(this.controller.signal, dataPending)
+    }
 
     handleChange = e => {
         e.persist();
@@ -32,11 +39,8 @@ class EditUsers extends React.Component {
         }
 
         updateUserData(form).then(res=>{
-            const {getUserPending, getUserApproved, getUserRejected, getUserBanned} = this.props;
-            getUserPending()
-            getUserApproved()
-            getUserRejected()
-            getUserBanned()
+            const {updateData} = this;
+            updateData()
             this.props.history.push('/admin')
         })
     }

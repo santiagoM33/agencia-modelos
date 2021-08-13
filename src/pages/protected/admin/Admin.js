@@ -11,11 +11,7 @@ import AdminProvider from '../../../context/AdminContext';
 class Admin extends React.Component {
     state = {
         activeTab: '1',
-        pending: [],
-        approved: [],
-        rejected: [],
-        banned: [],
-        modal: false,
+        modal: false
     }
 
     setActiveTab = tab => this.setState({ activeTab: tab })
@@ -33,28 +29,10 @@ class Admin extends React.Component {
         this.setState({ form: { ...this.state.form, [e.target.name]: e.target.value } })
     }
 
-    /* ------------ TABS -------------- */
-    stayApproved = () => {
-        const approved = document.querySelector('#approved');
-        approved.className.replace(" ", "active");
-        this.setState({activeTab: '2'})
-    } 
-
-    /*----------------------- */
-    /*----------------------- */
     //Verificar como mejorar esto
     //componentWillUnmount(){this.controller.abort()}
 
     render() {
-        const { setActiveTab, stayApproved } = this;
-        const { user, users, loading, 
-            currentPagePending, currentPageApproved, currentPageRejected, currentPageBanned, 
-            limitApproved, limitPending, limitRejected, limitBanned,
-            getUserApproved, getUserPending, getUserRejected, getUserBanned,
-            setPaginateApproved, setPaginatePending, 
-            setPaginateRejected, setPaginateBanned } = this.props;
-        if (!user || !users) return null;
-        const { pending, approved, rejected, banned } = users;
         const { activeTab } = this.state;
         
         return (

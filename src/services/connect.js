@@ -224,6 +224,23 @@ export const getUsers = async (signal, data) => {
     return promise;
 }
 
+export const getUsersStatus = async (signal, data) => {
+    const promise = new Promise(async (response, reject) => {
+        try{
+            const res = await fetch(`${BASE_URI}/users/?status=${data.status}`, {signal: signal})
+            const body = await res.json();
+                if (res !== 0) {
+                    return response(body)
+                } else {
+                    return reject(body)
+                }
+        } catch (err) {
+            reject({errors: [err]})
+        }
+    })
+    return promise;
+}
+
 export const getUsersById = async id => {
     const requestData = {
         method: 'GET', 

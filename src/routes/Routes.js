@@ -11,6 +11,7 @@ import EditUsers from '../pages/protected/admin/pages/EditUsers';
 import Profile from '../pages/protected/profile/Profile';
 import EditModelProfile from '../pages/protected/profile/pages/EditModelProfile';
 import Services from '../pages/protected/admin/pages/Services';
+const Escort = React.lazy(() => import('../pages/home/pages/Escort'));
 const Login = React.lazy(() => import('../pages/login/Login'));
 const Register = React.lazy(() => import('../pages/register/Register'));
 const Announce = React.lazy(() => import('../pages/announce/Announce'));
@@ -97,27 +98,6 @@ class Routes extends React.Component {
         getEscorts(this.controller.signal).then(res=>this.setState({models: res}))
     }
 
-    /* ----------------- PAGINATE SECTION  --------------------- */
-
-    setPaginateApproved = (currentPageApproved, offsetApproved) => this.setState({currentPageApproved, offsetApproved}, () => {
-        this.getUserApproved()
-    })
-
-    setPaginatePending = (currentPagePending, offsetPending) => this.setState({currentPagePending, offsetPending}, () => {
-        this.getUserPending()
-    })
-
-    setPaginateRejected = (currentPageRejected, offsetRejected) => this.setState({currentPageRejected, offsetRejected}, () => {
-        this.getUserRejected()
-    })
-
-    setPaginateBanned = (currentPageBanned, offsetBanned) => this.setState({currentPageBanned, offsetBanned}, () => {
-        this.getUserBanned()
-    })
-
-    /* -------------------- -------- ----------------------- */
-    /* -------------------- -------- ----------------------- */
-
     /* ----------------- LOGIN SECTION  --------------------- */
     handleLogin = data => this.setState({loggedInStatus: 'LOGGED_IN',user: data})
     
@@ -135,11 +115,7 @@ class Routes extends React.Component {
     //componentWillUnmount(){this.controller.abort()}
 
     render() { 
-        const { getUserPending, getUserApproved, getUserRejected, getUserBanned, 
-        setPaginateApproved, setPaginatePending, setPaginateRejected, setPaginateBanned } = this;
-        const { user, models, token, pending, approved, rejected, banned, loading, 
-        currentPageApproved, currentPagePending, currentPageRejected, currentPageBanned,
-        limitApproved, limitPending, limitRejected, limitBanned } = this.state;
+        const { user, models, token, pending, approved, rejected, banned } = this.state;
         const users = {
             pending,
             approved,
@@ -163,9 +139,7 @@ class Routes extends React.Component {
                         <React.Suspense fallback={<p>Loading...</p>}>
                             <Route exact path="/login" component={ publicProps => (
                                 <Login {...publicProps}
-                                    //user={this.state.user}
                                     handleLogin={this.handleLogin}
-                                    //fileGrabber={this.fileGrabber}
                                 />
                             )}
                             />
@@ -177,7 +151,6 @@ class Routes extends React.Component {
                             />
                             <Route exact path="/announce" component={ publicProps => (
                                <Announce {...publicProps}
-                                    //user={this.state.user}
                                     //handleLogin={this.handleLogin}
                                 />
                             )}                         
@@ -185,28 +158,6 @@ class Routes extends React.Component {
                             <PrivateRoute exact path="/admin" authed={!!user} component={ privateProps => (
                                 <Admin {...privateProps}
                                     user={user}
-                                    users={users}
-                                    loading={loading}
-                                    
-                                    currentPagePending={currentPagePending}
-                                    currentPageApproved={currentPageApproved}
-                                    currentPageRejected={currentPageRejected}
-                                    currentPageBanned={currentPageBanned}
-                                    
-                                    limitApproved={limitApproved}
-                                    limitPending={limitPending}
-                                    limitRejected={limitRejected}
-                                    limitBanned={limitBanned}
-
-                                    setPaginateApproved={setPaginateApproved}
-                                    setPaginatePending={setPaginatePending}
-                                    setPaginateRejected={setPaginateRejected}
-                                    setPaginateBanned={setPaginateBanned}
-
-                                    getUserApproved={getUserApproved}
-                                    getUserPending={getUserPending}
-                                    getUserRejected={getUserRejected}
-                                    getUserBanned={getUserBanned}
                                     
                                     loggedInStatus={this.state.loggedInStatus}
                                     handleLogout={this.handleLogout}
@@ -217,11 +168,6 @@ class Routes extends React.Component {
                                 <Dashboard {...privateProps}
                                     //token={this.state.token}
                                     user={user}
-                                    //users={this.state.users}
-                                    //getUsers={this.getUsers}
-                                    //role={this.state.role}
-                                    //pagination={this.state.pagination}
-                                    //handleLogout={this.handleLogout}
                                 />
                             )}
                             />
@@ -229,11 +175,6 @@ class Routes extends React.Component {
                                 <Profile {...privateProps}
                                     //token={this.state.token}
                                     user={user}
-                                    //users={this.state.users}
-                                    //getUsers={this.getUsers}
-                                    //role={this.state.role}
-                                    //pagination={this.state.pagination}
-                                    //handleLogout={this.handleLogout}
                                 />
                             )}
                             />
@@ -241,11 +182,6 @@ class Routes extends React.Component {
                                 <Services {...privateProps}
                                     //token={this.state.token}
                                     user={user}
-                                    //users={this.state.users}
-                                    //getUsers={this.getUsers}
-                                    //role={this.state.role}
-                                    //pagination={this.state.pagination}
-                                    //handleLogout={this.handleLogout}
                                 />
                             )}
                             />
@@ -254,10 +190,6 @@ class Routes extends React.Component {
                                     token={token}
                                     user={user}
                                     models={models}
-                                    //getUsers={this.getUsers}
-                                    //role={this.state.role}
-                                    //pagination={this.state.pagination}
-                                    //handleLogout={this.handleLogout}
                                 />
                             )}
                             />   
@@ -265,13 +197,15 @@ class Routes extends React.Component {
                                 <EditUsers {...privateProps}
                                     //token={this.state.token}
                                     user={user}
-                                    getUserPending={getUserPending}
-                                    getUserApproved={getUserApproved}
-                                    getUserRejected={getUserRejected}
-                                    getUserBanned={getUserBanned}
                                 />
                             )}
                             />  
+                            <Route exact path="/:escortName" component={ publicProps => (
+                                <Escort {...publicProps}
+                                    
+                                />
+                            )}
+                            />
                         </React.Suspense>
                     </Switch>
                 </main>

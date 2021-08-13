@@ -88,7 +88,9 @@ class AdminProvider extends React.Component {
     })
 
 
-
+    componentWillUnmount(){
+        //this.controller.abort()
+    }
 
 
     render() {

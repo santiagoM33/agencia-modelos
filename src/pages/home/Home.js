@@ -30,8 +30,9 @@ class Home extends React.Component {
         const file = enMinuscula.split(' ').join('-').split(',');*/
         //.filter(e=>e.roleId === 2) || [];
    
-        const {data } = this.props.models;
+        const {data} = this.props.models;
         if(!data) return null;
+        //console.log('Model: ', data[0])
         return ( 
             <React.Fragment>
                 <main className='container-fluid'>
@@ -46,7 +47,7 @@ class Home extends React.Component {
                                             <CardTitle tag="h5">{model.User.alias}</CardTitle>
                                             <CardSubtitle tag="h6" className="mb-2 text-muted">{model.location}</CardSubtitle>
                                             <CardText>{model.User.email}</CardText>
-                                            <Button onClick={()=> this.props.history.push(model.User.alias.toLowerCase())}>Ver mas</Button>
+                                            <Button onClick={()=> this.props.history.push(model.User.alias.toLowerCase().replace(' ', '-'))}>Ver mas</Button>
                                         </CardBody>
                                     </Card>
                             </section>                               
