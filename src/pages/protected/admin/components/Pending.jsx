@@ -3,19 +3,21 @@ import { Card, Button, Row, Col, Table } from 'reactstrap';
 import { updateStatus } from '../../../../services/connect';
 import Swal from 'sweetalert2';
 import NavegationPending from './NavegationPending';
+import { AdminContext } from '../../../../context/AdminContext';
 
 class Pending extends React.Component {
+    static contextType = AdminContext;
 
     state = {
-        pendingItemsRemaining: this.props.pending.itemsRemaining,
-        pendingPagesRemaining: this.props.pending.pagesRemaining,
+        pendingItemsRemaining: this.context.pending.itemsRemaining,
+        pendingPagesRemaining: this.context.pending.pagesRemaining,
     }
     
 
     prevPage = () => {
-        const { setPaginatePending } = this.props;
-        let currentPage = this.props.currentPage;
-        let offset = currentPage * this.props.limit;
+        const { setPaginatePending, limitPending } = this.context;
+        let currentPage = this.context.currentPagePending;
+        let offset = currentPage * limitPending;
         if(currentPage < 0) return null;
         if(offset < 0) return null;
         currentPage-=1;
@@ -25,9 +27,9 @@ class Pending extends React.Component {
 
     nextPage = () => {
         //const { approvedPagesRemaining } = this.state;
-        const { setPaginatePending } = this.props;
-        let currentPage = this.props.currentPage;
-        let offset = currentPage * this.props.limit;
+        const { setPaginatePending, limitPending } = this.context;
+        let currentPage = this.context.currentPagePending;
+        let offset = currentPage * limitPending;
         //let lastPage = approvedPagesRemaining;
         //if(currentPage === lastPage) return null;
         currentPage++;
@@ -36,8 +38,9 @@ class Pending extends React.Component {
     }
 
     showPending = () => {
-        const {data} = this.props.pending;
-        if (!data) return null;
+        const { pending, getUserPending } = this.context;
+        const { data } = pending;
+        if ( !data ) return null;
   
         return (
             <React.Fragment>
@@ -68,7 +71,7 @@ class Pending extends React.Component {
                                             confirmButtonColor: '#3085d6',
                                             cancelButtonColor: '#d33',
                                             confirmButtonText: 'Yes, approved it!',
-                                            willClose: ()=>this.props.getUserPending()
+                                            willClose: ()=>getUserPending()
                                           }).then((result) => {
                                             if (result.isConfirmed) {
                                               Swal.fire(
@@ -95,7 +98,7 @@ class Pending extends React.Component {
                                             confirmButtonColor: '#3085d6',
                                             cancelButtonColor: '#d33',
                                             confirmButtonText: 'Yes, reject it!',
-                                            willClose: ()=>this.props.getUserPending()
+                                            willClose: ()=>getUserPending()
                                           }).then((result) => {
                                             if (result.isConfirmed) {
                                               Swal.fire(
@@ -122,8 +125,7 @@ class Pending extends React.Component {
     }
 
     render() {
-        const {pendingPagesRemaining} = this.state;
-        const {pending, currentPage, limit} = this.props;
+        const { pending, currentPagePending, limitPending } = this.context;
         return (
             <><Row>
                 <Col sm="12">
@@ -145,15 +147,17 @@ class Pending extends React.Component {
                     </Card>
                 </Col>
             </Row>
+           
                 {//!!pendingPagesRemaining && 
                     <NavegationPending
-                        pending={pending} 
-                        currentPage={currentPage}
-                        limit={limit}
+                        pending={pending}
+                        currentPage={currentPagePending}
+                        limit={limitPending}
                         prevPage={this.prevPage}
                         nextPage={this.nextPage}
                     />
                 }
+          
             </>
 
         )

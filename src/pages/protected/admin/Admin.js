@@ -6,6 +6,7 @@ import Pending from './components/Pending';
 import Approved from './components/Approved';
 import Rejected from './components/Rejected';
 import Banned from './components/Banned';
+import AdminProvider from '../../../context/AdminContext';
 
 class Admin extends React.Component {
     state = {
@@ -32,13 +33,20 @@ class Admin extends React.Component {
         this.setState({ form: { ...this.state.form, [e.target.name]: e.target.value } })
     }
 
+    /* ------------ TABS -------------- */
+    stayApproved = () => {
+        const approved = document.querySelector('#approved');
+        approved.className.replace(" ", "active");
+        this.setState({activeTab: '2'})
+    } 
+
     /*----------------------- */
     /*----------------------- */
     //Verificar como mejorar esto
     //componentWillUnmount(){this.controller.abort()}
 
     render() {
-        const { setActiveTab } = this;
+        const { setActiveTab, stayApproved } = this;
         const { user, users, loading, 
             currentPagePending, currentPageApproved, currentPageRejected, currentPageBanned, 
             limitApproved, limitPending, limitRejected, limitBanned,
@@ -69,6 +77,7 @@ class Admin extends React.Component {
                                     className={classnames(`p-2 p-sm-4 p-md-5`, { active: activeTab === '2' })}
                                     onClick={() => { this.toggleTab('2'); }}
                                     style={{ cursor: "pointer" }}
+                                    id='approved'
                                 >
                                     Approved
                                 </NavLink>
@@ -92,16 +101,11 @@ class Admin extends React.Component {
                                 </NavLink>
                             </NavItem>
                         </Nav>
+                        
                         <TabContent activeTab={activeTab}>
+                        <AdminProvider>
                             <TabPane tabId="1">
-                                <Pending pending={pending}
-                                         loading={loading} 
-                                         currentPage={currentPagePending} 
-                                         limit={limitPending} 
-                                         getUserPending={getUserPending}
-                                         setPaginatePending={setPaginatePending} 
-                                         setActiveTab={setActiveTab}
-                                />
+                                <Pending />
                             </TabPane>
                             <TabPane tabId="2">
                                 <Approved approved={approved} 
@@ -111,6 +115,7 @@ class Admin extends React.Component {
                                           getUserApproved={getUserApproved}
                                           setPaginateApproved={setPaginateApproved}
                                           setActiveTab={setActiveTab}
+                                          stayApproved={stayApproved}
                                 />
                             </TabPane>
                             <TabPane tabId="3">
@@ -131,7 +136,9 @@ class Admin extends React.Component {
                                         setPaginateBanned={setPaginateBanned} 
                                 />
                             </TabPane>
+                            </AdminProvider>
                         </TabContent>
+                       
                     </div>
                 </div>
             </article>

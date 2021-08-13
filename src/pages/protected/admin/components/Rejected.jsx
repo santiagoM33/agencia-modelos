@@ -1,20 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Table } from 'reactstrap';
+import { AdminContext } from '../../../../context/AdminContext';
 import NavegationRejected from './NavegationRejected';
 
 class Rejected extends React.Component {
+    static contextType = AdminContext;
 
     state = {
-        rejectedItemsRemaining: this.props.rejected.itemsRemaining,
-        rejectedPagesRemaining: this.props.rejected.pagesRemaining,
+        rejectedItemsRemaining: this.context.rejected.itemsRemaining,
+        rejectedPagesRemaining: this.context.rejected.pagesRemaining,
     }
 
 
     prevPage = () => {
-        const { setPaginateRejected } = this.props;
-        let currentPage = this.props.currentPage;
-        let offset = currentPage * this.props.limit;
+        const { setPaginateRejected, limitRejected } = this.context;
+        let currentPage = this.context.currentPageRejected;
+        let offset = currentPage * limitRejected;
         if (currentPage < 0) return null;
         if (offset < 0) return null;
         currentPage -= 1;
@@ -24,9 +26,9 @@ class Rejected extends React.Component {
 
     nextPage = () => {
         //const { approvedPagesRemaining } = this.state;
-        const { setPaginateRejected } = this.props;
-        let currentPage = this.props.currentPage;
-        let offset = currentPage * this.props.limit;
+        const { setPaginateRejected, limitRejected } = this.context;
+        let currentPage = this.context.currentPageRejected;
+        let offset = currentPage * limitRejected;
         //let lastPage = approvedPagesRemaining;
         //if(currentPage === lastPage) return null;
         currentPage++;
@@ -35,11 +37,12 @@ class Rejected extends React.Component {
     }
 
     showRejected = () => {
-        const { data } = this.props.rejected;
+        const { rejected, loading } = this.context;
+        const { data } = rejected;
         if (!data) return null;
         return (
             <React.Fragment>
-                {this.props.loading
+                {loading
                     ? <div class="sk-chase">
                         <div class="sk-chase-dot"></div>
                         <div class="sk-chase-dot"></div>
@@ -70,8 +73,7 @@ class Rejected extends React.Component {
     }
 
     render() {
-        const { rejectedPagesRemaining } = this.state;
-        const { rejected, currentPage, limit } = this.props;
+        const { rejected, currentPageRejected, limitRejected } = this.context;
         return (
             <><Row>
                 <Col sm="12">
@@ -93,11 +95,11 @@ class Rejected extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                {!!rejectedPagesRemaining &&
+                {//!!rejectedPagesRemaining &&
                     <NavegationRejected
                         rejected={rejected}
-                        currentPage={currentPage}
-                        limit={limit}
+                        currentPage={currentPageRejected}
+                        limit={limitRejected}
                         prevPage={this.prevPage}
                         nextPage={this.nextPage}
                     />

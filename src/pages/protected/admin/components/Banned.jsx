@@ -1,20 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Table } from 'reactstrap';
+import { AdminContext } from '../../../../context/AdminContext';
 import NavegationBanned from './NavegationBanned';
 
 class Banned extends React.Component {
+    static contextType = AdminContext;
 
     state = {
-        bannedItemsRemaining: this.props.banned.itemsRemaining,
-        bannedPagesRemaining: this.props.banned.pagesRemaining,
+        bannedItemsRemaining: this.context.banned.itemsRemaining,
+        bannedPagesRemaining: this.context.banned.pagesRemaining,
     }
 
 
     prevPage = () => {
-        const { setPaginateBanned } = this.props;
-        let currentPage = this.props.currentPage;
-        let offset = currentPage * this.props.limit;
+        const { setPaginateBanned, limitBanned } = this.context;
+        let currentPage = this.context.currentPage;
+        let offset = currentPage * limitBanned;
         if (currentPage < 0) return null;
         if (offset < 0) return null;
         currentPage -= 1;
@@ -24,9 +26,9 @@ class Banned extends React.Component {
 
     nextPage = () => {
         //const { approvedPagesRemaining } = this.state;
-        const { setPaginateBanned } = this.props;
-        let currentPage = this.props.currentPage;
-        let offset = currentPage * this.props.limit;
+        const { setPaginateBanned, limitBanned } = this.props;
+        let currentPage = this.context.currentPage;
+        let offset = currentPage * limitBanned;
         //let lastPage = approvedPagesRemaining;
         //if(currentPage === lastPage) return null;
         currentPage++;
@@ -35,11 +37,12 @@ class Banned extends React.Component {
     }
 
     showBanned = () => {
-        const { data } = this.props.banned;
+        const { banned, loading } = this.context;
+        const { data } = banned;
         if (!data) return null;
         return (
             <React.Fragment>
-                {this.props.loading
+                {loading
                     ? <div class="sk-chase">
                         <div class="sk-chase-dot"></div>
                         <div class="sk-chase-dot"></div>
@@ -70,8 +73,7 @@ class Banned extends React.Component {
     }
 
     render() {
-        const { bannedPagesRemaining } = this.state;
-        const { banned, currentPage, limit } = this.props;
+        const { banned, currentPageBanned, limitBanned } = this.context;
         return (
             <>
 
@@ -95,11 +97,11 @@ class Banned extends React.Component {
                         </Card>
                     </Col>
                 </Row>
-                {!!bannedPagesRemaining &&
+                {//!!bannedPagesRemaining &&
                     <NavegationBanned
                         banned={banned}
-                        currentPage={currentPage}
-                        limit={limit}
+                        currentPage={currentPageBanned}
+                        limit={limitBanned}
                         prevPage={this.prevPage}
                         nextPage={this.nextPage}
                     />

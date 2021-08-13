@@ -1,21 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Table } from 'reactstrap';
+import { AdminContext } from '../../../../context/AdminContext';
 import NavegationApproved from './NavegationApproved';
 
 
 class Approved extends React.Component {
+    static contextType = AdminContext;
 
     state = {
-        approvedItemsRemaining: this.props.approved.itemsRemaining,
-        approvedPagesRemaining: this.props.approved.pagesRemaining,
+        approvedItemsRemaining: this.context.approved.itemsRemaining,
+        approvedPagesRemaining: this.context.approved.pagesRemaining,
     }
     
 
     prevPage = () => {
-        const { setPaginateApproved } = this.props;
-        let currentPage = this.props.currentPage;
-        let offset = currentPage * this.props.limit;
+        const { setPaginateApproved, limitApproved } = this.context;
+        let currentPage = this.context.currentPageApproved;
+        let offset = currentPage * limitApproved;
         if(currentPage < 0) return null;
         if(offset < 0) return null;
         currentPage-=1;
@@ -25,9 +27,9 @@ class Approved extends React.Component {
 
     nextPage = () => {
         //const { approvedPagesRemaining } = this.state;
-        const { setPaginateApproved } = this.props;
-        let currentPage = this.props.currentPage;
-        let offset = currentPage * this.props.limit;
+        const { setPaginateApproved, limitApproved } = this.context;
+        let currentPage = this.context.currentPageApproved;
+        let offset = currentPage * limitApproved;
         //let lastPage = approvedPagesRemaining;
         //if(currentPage === lastPage) return null;
         currentPage++;
@@ -36,7 +38,7 @@ class Approved extends React.Component {
     }
     
     showApproved = () => {
-        const { loading, approved } = this.props;
+        const { loading, approved } = this.context;
         const { data } = approved;
         if(!data) return null;
         return (
@@ -76,8 +78,7 @@ class Approved extends React.Component {
 
 
     render() {
-        const { approvedPagesRemaining } = this.state;
-        const { approved, currentPage, limit } = this.props;
+        const { approved, currentPageApproved, limitApproved } = this.context;
         if(!approved.data) return null;
         //const indexOfLastItem = (currentPage + 1) * limit;
         //const indexOfFirstItem = indexOfLastItem - limit;
@@ -103,11 +104,11 @@ class Approved extends React.Component {
                     </Card>
                 </Col>
             </Row>
-                {!!approvedPagesRemaining && 
+                {//!!approvedPagesRemaining && 
                     <NavegationApproved 
                         approved={approved}
-                        currentPage={currentPage}
-                        limit={limit}
+                        currentPage={currentPageApproved}
+                        limit={limitApproved}
                         prevPage={this.prevPage}
                         nextPage={this.nextPage}
                     />

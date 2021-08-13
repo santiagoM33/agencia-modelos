@@ -3,16 +3,17 @@ import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 class NavegationPending extends React.Component {
   render() {
-    const { pending, prevPage, nextPage, limit, currentPage } = this.props;
+    const { pending, limit, currentPage, prevPage, nextPage } = this.props;
+    if(!pending) return null;
     const { itemsRemaining, pagesRemaining } = pending;
     if (!itemsRemaining || !pagesRemaining) return null;
 
-    const pageNumbers = [];
+    /*const pageNumbers = [];
 
     for (let i = 0; i <= Math.ceil(itemsRemaining / limit); i++) {
       pageNumbers.push(i);
 
-    }
+    }*/
 
     //const paginate = pageNumber => setCurrentPage(pageNumber)
     //onClick={()=> paginate(number)}
