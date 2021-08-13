@@ -108,33 +108,13 @@ class Admin extends React.Component {
                                 <Pending />
                             </TabPane>
                             <TabPane tabId="2">
-                                <Approved approved={approved} 
-                                          loading={loading} 
-                                          currentPage={currentPageApproved} 
-                                          limit={limitApproved} 
-                                          getUserApproved={getUserApproved}
-                                          setPaginateApproved={setPaginateApproved}
-                                          setActiveTab={setActiveTab}
-                                          stayApproved={stayApproved}
-                                />
+                                <Approved />
                             </TabPane>
                             <TabPane tabId="3">
-                                <Rejected rejected={rejected}
-                                          loading={loading} 
-                                          currentPage={currentPageRejected} 
-                                          limit={limitRejected} 
-                                          getUserRejected={getUserRejected}
-                                          setPaginateRejected={setPaginateRejected} 
-                                />
+                                <Rejected />
                             </TabPane>
                             <TabPane tabId="4">
-                                <Banned banned={banned}
-                                        loading={loading} 
-                                        currentPage={currentPageBanned} 
-                                        limit={limitBanned} 
-                                        getUserBanned={getUserBanned}
-                                        setPaginateBanned={setPaginateBanned} 
-                                />
+                                <Banned />
                             </TabPane>
                             </AdminProvider>
                         </TabContent>
