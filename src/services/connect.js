@@ -205,6 +205,33 @@ export const updateService = async service => {
     return promise;
 }
 
+export const updateEscorts = async escorts => {
+    const requestData = {
+        method: 'PUT', 
+        headers: new Headers({
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-type': 'application/json'
+        }),
+        body: JSON.stringify(escorts)
+        
+    }
+
+    const promise = new Promise(async (response, reject) => {
+        try{
+            const res = await fetch(`${BASE_URI}/escorts/${escorts.id}`, requestData)
+            const body = await res.json();
+                if (res.ok) {
+                    return response(body)
+                } else {
+                    return reject(body)
+                }
+        } catch (err) {
+            reject({errors: [err]})
+        }
+    })
+    return promise;
+}
+
 /*---------------------     GETS     ------------------------ */
 /*---------------------     GETS     ------------------------ */
 export const getUsers = async (signal, data) => {
@@ -303,6 +330,32 @@ export const getRoles = async signal => {
     const promise = new Promise(async (response, reject) => {
         try{
             const res = await fetch(`${BASE_URI}/roles`, {signal: signal})
+            const body = await res.json();
+                if (res !== 0) {
+                    return response(body)
+                } else {
+                    return reject(body)
+                }
+        } catch (err) {
+            reject({errors: [err]})
+        }
+    })
+    return promise;
+}
+
+/* -------------------------- DELETE ------------------------------ */
+
+export const deleteService = async id => {
+    const requestData = {
+        method: 'DELETE', 
+        headers: new Headers({
+            'Authorization': `Bearer ${accessToken}`, 
+        })
+        
+    }
+    const promise = new Promise(async (response, reject) => {
+        try{
+            const res = await fetch(`${BASE_URI}/services/${id}`, requestData)
             const body = await res.json();
                 if (res !== 0) {
                     return response(body)

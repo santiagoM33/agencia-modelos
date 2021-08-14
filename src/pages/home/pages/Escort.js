@@ -3,7 +3,7 @@ import React from 'react';
 class Escort extends React.Component {
     state = {  }
     render() { 
-        console.log('Escort ID: ', this.props)
+        //console.log('Escort ID: ', this.props)
         return ( 
             <div className='container'>
                 <div className='row'>

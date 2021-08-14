@@ -36,7 +36,7 @@ class Admin extends React.Component {
         const { activeTab } = this.state;
         
         return (
-            <article className='container'>
+            <article>
                 <h3 className='mt-3'>Admin</h3>
                 <div className='row'>
                     <div className='col-12'>

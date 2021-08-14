@@ -16,13 +16,14 @@ class FormRegister extends React.Component {
         //Manejo de errores generales
         hasError: false,
         //Login
-        isLogin: false
+        isLogin: false,
+        roles: []
     }
 
     controller = new AbortController();
         
     componentDidMount(){
-        getRoles(this.controller.signal).then(res=>console.log(res))
+        getRoles(this.controller.signal).then(roles => this.setState({roles}))
     }
  
     _onHandleChange = e => {
@@ -64,8 +65,6 @@ class FormRegister extends React.Component {
     isMatch = param => {
         if (param.alias.length > 0 && param.email.length > 0 && param.password.length > 0) {
             const {alias, email, password, roleId} = param;
-            //let fileName = `${firstName} ${lastName}`;
-            //this.props.fileGrabber(fileName)
             registerDataAccount({
                 alias,
                 email,
@@ -97,7 +96,8 @@ class FormRegister extends React.Component {
     componentWillUnmount(){this.controller.abort()}
 
     render() {
-        const {aliasError, emailError, passError } = this.state;
+        const {aliasError, emailError, passError, roles } = this.state;
+        if(!roles) return null;
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <div className='col-12 input-group'>
@@ -161,10 +161,9 @@ class FormRegister extends React.Component {
                             <label className="input-group-text" htmlFor="inputGroupSelect01">Role</label>
                         </div>
                         <select className="custom-select" id="inputGroupSelect01" onChange={this._handleChange}>
-                            <option defaultValue>Choose...</option>
-                            <option value="1">Admin</option>
-                            <option value="2">Model</option>
-                            <option value="3">User</option>
+                            {roles.map(rol=> (
+                                <option key={rol.id} defaultValue={rol.label}>{rol.name}</option>
+                            ))}
                         </select>
                      </div>
                 </div>

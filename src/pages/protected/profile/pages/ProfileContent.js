@@ -6,7 +6,8 @@ class ProfileContent extends React.Component {
     static contextType = ProfileContext;
     state = {}
     render() {
-        //const { services } = this.context;
+        const { services } = this.context;
+        console.log(services[0])
         return (
             <div className="container mt-3">
                 

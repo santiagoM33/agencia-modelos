@@ -15,7 +15,7 @@ class ProfileProvider extends React.Component {
     }
 
     componentWillUnmount(){
-        this.controller.abort()
+        //this.controller.abort()
     }
 
     render() { 

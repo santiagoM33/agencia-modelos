@@ -18,7 +18,7 @@ class NavegationBanned extends React.Component {
     //onClick={()=> paginate(number)}
 
     return (
-      <Pagination aria-label="Page navigation status" className={`${!!currentPage ? 'offset-4 offset-sm-4 offset-md-5 mt-4' : 'offset-5 offset-sm-5 offset-md-5 mt-4'} `}>
+      <Pagination aria-label="Page navigation status" className={!!currentPage ? 'offset-4 offset-sm-4 offset-md-5 mt-4' : 'offset-5 offset-sm-5 offset-md-5 mt-4'}>
         {!!currentPage &&
           <PaginationItem>
             <PaginationLink previous href="#" onClick={prevPage} />

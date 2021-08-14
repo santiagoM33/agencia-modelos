@@ -7,11 +7,12 @@ import ResetPasswordRequest from '../pages/ResetPasswordRequest';
 import ResetPassword from '../pages/ResetPassword';
 import 'bootstrap/dist/css/bootstrap.css';
 import { getEscorts, getUsers } from '../services/connect';
-import EditUsers from '../pages/protected/admin/pages/EditUsers';
-import Profile from '../pages/protected/profile/Profile';
-import EditModelProfile from '../pages/protected/profile/pages/EditModelProfile';
-import Services from '../pages/protected/admin/pages/Services';
-const Escort = React.lazy(() => import('../pages/home/pages/Escort'));
+const EditUsers = React.lazy(() => import('../pages/protected/admin/pages/EditUsers'));
+const Profile = React.lazy(() => import('../pages/protected/profile/Profile'));
+const EditModelProfile = React.lazy(() => import('../pages/protected/profile/pages/EditModelProfile'));
+const Services = React.lazy(() => import('../pages/protected/admin/pages/Services'));
+const EditServices = React.lazy(() => import('../pages/protected/admin/pages/EditServices'));
+//const Escort = React.lazy(() => import('../pages/home/pages/Escort'));
 const Login = React.lazy(() => import('../pages/login/Login'));
 const Register = React.lazy(() => import('../pages/register/Register'));
 const Announce = React.lazy(() => import('../pages/announce/Announce'));
@@ -126,7 +127,7 @@ class Routes extends React.Component {
         return ( 
             <BrowserRouter>
                <Header authed={!!user} user={user} handleLogout={this.handleLogout} />
-                <main>
+                <main className='container'>
                     <Switch>
                         <Route exact path='/' render={props => (
                             <Home {...props}
@@ -185,6 +186,13 @@ class Routes extends React.Component {
                                 />
                             )}
                             />
+                            <PrivateRoute exact path="/services/:serviceId" authed={!!user} component={ privateProps => (
+                                <EditServices {...privateProps}
+                                    //token={this.state.token}
+                                    user={user}
+                                />
+                            )}
+                            />
                             <PrivateRoute exact path="/escorts/:escordId" authed={!!user} component={ privateProps => (
                                 <EditModelProfile {...privateProps}
                                     token={token}
@@ -200,12 +208,12 @@ class Routes extends React.Component {
                                 />
                             )}
                             />  
-                            <Route exact path="/:escortName" component={ publicProps => (
+                            {/*<Route exact path="/:escortName" component={ publicProps => (
                                 <Escort {...publicProps}
                                     
                                 />
                             )}
-                            />
+                            />*/}
                         </React.Suspense>
                     </Switch>
                 </main>
