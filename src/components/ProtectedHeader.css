@@ -1,0 +1,5 @@
+@media (max-width: 280px) {
+    .p-xs-1 {
+      margin: .1em;
+    }
+}

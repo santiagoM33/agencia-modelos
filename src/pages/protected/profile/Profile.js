@@ -12,7 +12,7 @@ class Profile extends React.Component {
             return (
                 <ProfileProvider>
                     <Navigation user={user}/>
-                    <ProfileContent />
+                    <ProfileContent user={user}/>
                 </ProfileProvider>
             )
         } else {

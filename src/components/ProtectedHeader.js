@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, NavLink, withRouter } from 'react-router-dom';
+import './ProtectedHeader.css';
 
 class ProtectedHeader extends React.Component {
     state = {  }
@@ -13,16 +14,16 @@ class ProtectedHeader extends React.Component {
                 <nav className="my-2 my-md-0 mr-md-3">
                     {(user.roleId === 2 ) &&
                         <>
-                            <Link className="p-2 text-dark" to="/gallery">Gallery</Link>
-                            <Link className="p-2 text-dark" to="/publish">Publish</Link>
+                            <Link className="p-xs-1 p-2 text-dark" to="/gallery">Gallery</Link>
+                            <Link className="p-xs-1 p-2 text-dark" to="/publish">Publish</Link>
                         </>
                     }
                     {user.roleId === 1 && 
-                        <Link className="p-2 text-dark" to="/admin">Admin</Link>
+                        <Link className="p-xs-1 p-2 text-dark" to="/admin">Admin</Link>
                     }
-                    <Link className="p-2 text-dark" to="/profile">Profile</Link>
+                    <Link className="p-xs-1 p-2 text-dark" to="/profile">Profile</Link>
                 
-                <NavLink className='btn btn-outline-primary' to='/login'
+                <NavLink className='p-xs-1 btn btn-outline-primary' to='/login'
                     onClick={() => {
                         history.push('/login')
                         handleLogout()

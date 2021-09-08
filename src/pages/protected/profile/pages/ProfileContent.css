@@ -356,3 +356,7 @@ p {
     margin-bottom: 10px;
   }
 }
+
+.measures a{
+  text-decoration: none;
+}
