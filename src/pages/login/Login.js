@@ -18,7 +18,7 @@ class Login extends React.Component {
             <div className='container'>
                 <div className='offset-md-2 col-md-8 card my-3 mt-sm-5 p-2 shadow-sm rounded-sm'>
                     <h3
-                        className='text-center my-3 h5 text-dark'
+                        className='text-center my-3 h4 text-dark'
                     >Ingresar</h3>
                     <div className='row'>
                         <div className='col-12'>

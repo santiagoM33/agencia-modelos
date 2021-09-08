@@ -43,7 +43,7 @@ class Services extends React.Component {
                                 <Label for="icon">Icon</Label>
                                 <Input type="text" innerRef={this.iconRef} name="icon" id="icon" placeholder="Agregar icon patch. Ex. far fa-thumps"/>
                             </FormGroup>
-                            <Button color='primary' className='offset-2 mt-3 mt-sm-0 mt-md-0' onClick={this.handleClick}>Agregar</Button>
+                            <Button color='primary' className='offset-4 offset-sm-5 offset-lg-5 mt-3 mt-sm-0 mt-md-0' onClick={this.handleClick}>Agregar</Button>
                         </Form>
                     </div>
                 </div>

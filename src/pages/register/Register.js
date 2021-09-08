@@ -21,7 +21,7 @@ class Register extends React.Component {
                             Status: {this.props.loggedInStatus}
                         </div>*/}
                     <h3
-                        className='text-center my-3 h5 text-dark'
+                        className='text-center my-3 h4 text-dark'
                     >Registrar Usuario</h3>
                     <div
                         className='col-12'

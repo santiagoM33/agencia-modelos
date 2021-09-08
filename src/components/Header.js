@@ -84,16 +84,16 @@ class Header extends React.Component {
                         >
                         </Hamburguer>
                         <div className="collapse navbar-collapse row" id='navbarNav'>
-                            <div className={`navbar-nav offset-lg-8 container`} >
+                            <div className={`navbar-nav offset-lg-1 container`} >
                                 {authed === true
                                     ? <>
-                                        <NavLink activeClassName='active' className='text-dark col-4 offset-md-3 col-md-3 offset-lg-9 col-lg-1' to='/dashboard'>Dashboard</NavLink>
-                                        <div className='col-4 col-md-6'>
-                                            <NavLink className='nav-link text-dark' to='/login'
+                                        <NavLink activeClassName='active' className='text-dark col-4 col-md-3 offset-lg-8 col-lg-2 offset-xl-9 col-xl-1 mt-2' to='/dashboard'>Dashboard</NavLink>
+                                        {/*<div className='col-4 col-md-6'>*/}
+                                            <NavLink className='nav-link text-dark col-4 col-md-6 ml-3 ml-lg-0' to='/login'
                                                 onClick={() => {
                                                     handleLogout()
                                                 }}>Logout</NavLink>
-                                        </div>
+                                        {/*</div>*/}
                                     </>
                                     : <>
                                         <NavLink activeClassName='active' className='text-dark col-4 col-lg-1' to='/login'>Login</NavLink>

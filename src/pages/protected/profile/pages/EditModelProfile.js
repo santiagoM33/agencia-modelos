@@ -6,11 +6,11 @@ class EditModelProfile extends React.Component {
     render() { 
         const { data } = this.props.models;
         if(!data) return null;
-        //const {escordId} = this.props.match.params;
-        //const MODEL = data.find(el=>el.userId === Number(escordId));
-
+        const {escordId} = this.props.match.params;
+        const MODEL = data.find(el=>el.userId === Number(escordId));
+        //console.log('data', MODEL)
         return ( 
-            <FormProfile model={data[0]}/>
+            <FormProfile model={MODEL}/>
          );
     }
 }

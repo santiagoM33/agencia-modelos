@@ -8,7 +8,7 @@ class Profile extends React.Component {
 
     showProfile = () => {
         const { user } = this.props;
-        if (user.roleId === 1) {
+        if (user.roleId === 1 || user.roleId === 2) {
             return (
                 <ProfileProvider>
                     <Navigation user={user}/>
@@ -21,7 +21,7 @@ class Profile extends React.Component {
     }
 
     render() {
-        console.log('Props: ', this.props)
+        //console.log('Props: ', this.props)
         return (
             <React.Fragment>
                 {this.showProfile()}

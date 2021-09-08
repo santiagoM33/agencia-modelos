@@ -206,19 +206,16 @@ export const updateService = async service => {
 }
 
 export const updateEscorts = async escorts => {
+    console.log(escorts)
     const requestData = {
         method: 'PUT', 
-        headers: new Headers({
-            'Authorization': `Bearer ${accessToken}`, 
-            'Content-type': 'application/json'
-        }),
         body: JSON.stringify(escorts)
         
     }
 
     const promise = new Promise(async (response, reject) => {
         try{
-            const res = await fetch(`${BASE_URI}/escorts/${escorts.id}`, requestData)
+            const res = await fetch(`${BASE_URI}/escorts/${escorts.userId}`, requestData)
             const body = await res.json();
                 if (res.ok) {
                     return response(body)

@@ -4,3 +4,9 @@
     margin: 0 auto;
     padding: 2em;
 }
+
+@media screen and (max-width: 280px) {
+    .d-xs-flex{
+        display: flex;
+    }
+}

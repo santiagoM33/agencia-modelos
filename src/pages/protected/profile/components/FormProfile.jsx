@@ -3,12 +3,12 @@ import './FormProfile.css';
 import { Col, Row, Button, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import { ImWhatsapp } from 'react-icons/im'
 import { Link } from 'react-router-dom';
-import {updateEscorts} from '../../../../services/connect'
+import { updateEscorts } from '../../../../services/connect'
 
 class FormProfile extends React.Component {
     state = {
         sex: '',
-        phone: 0,
+        phone: '',
         whatsapp: false,
         yearOfBirth: 0,
         location: '',
@@ -23,12 +23,13 @@ class FormProfile extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    onHandleSubmit = () => {
+    onHandleClick = (e) => {
+        e.preventDefault();
         const MODEL = this.props.model
         if (!MODEL) return null;
         const { sex, phone, yearOfBirth, location, countryOfBirth, bio, profilePicture, serviceDescription} = this.state;
         const form = {
-            id: MODEL.id,
+            userId: MODEL.userId,
             sex,
             phone,
             yearOfBirth,
@@ -44,9 +45,9 @@ class FormProfile extends React.Component {
     render() {
         const MODEL = this.props.model
         if (!MODEL) return null;
-    
+        console.log('Model', MODEL)
         return (
-            <Form className='container' onSubmit={this.onHandleSubmit}>
+            <Form className='container'>
                 <fieldset className='fieldset mt-3'>
                     <legend className='text-secondary'>Datos Personales</legend>
                 <Row form>
@@ -55,9 +56,9 @@ class FormProfile extends React.Component {
                             <Label for="sex" sm={2}>Sexo: </Label>
                             <Col sm={12}>
                                 <Input type="select" name="sex" id="sex" onChange={this._onHandleChange} defaultValue={MODEL.sex}>
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                    <option>Trans</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="trans">Trans</option>
                                 </Input>
                             </Col>
                         </FormGroup>
@@ -143,9 +144,9 @@ class FormProfile extends React.Component {
                     </Col>
                 </Row>
                 </fieldset>
-                <Col sm={10}>
-                    <Button color='primary' className='offset-2 offset-sm-4 offset-md-5 mb-4 mt-2 mt-sm-4'>UPDATE</Button>
-                    <Link to='/profile' className='ml-2 mb-4 mt-2 mt-sm-4 btn btn-secondary'>CANCEL</Link>
+                <Col sm={12} className="d-xs-flex">
+                    <Button type='submit' color='primary' className='offset-xs-1 offset-2 offset-sm-4 offset-md-5 mb-4 mt-2 mt-sm-4' onClick={this.onHandleClick}>UPDATE</Button>
+                    <Link to='/profile' className='ml-2 mb-4 mt-2 mt-md-4 btn btn-secondary'>CANCEL</Link>
                 </Col>
             </Form>
         );

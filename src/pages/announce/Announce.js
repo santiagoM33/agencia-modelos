@@ -161,7 +161,7 @@ class Announce extends React.Component {
                             </div>
                             <div className="col-12 input-group mb-3">
                                 <PhoneInput
-                                    placeholder="Ingresa tu numero de contacto"
+                                    searchPlaceholder="Ingresa tu numero de contacto"
                                     inputProps={{
                                         name: 'phone',
                                         required: true
