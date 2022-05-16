@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Card, Row, Col, Table } from 'reactstrap';
 
 class Banned extends React.Component {
-    state = {}
 
     showBanned = () => {
         const {banned} = this.props;

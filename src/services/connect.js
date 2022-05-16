@@ -1,4 +1,5 @@
-const BASE_URI = 'http://159.65.218.115';
+//const BASE_URI = 'http://159.65.218.115';
+const BASE_URI = 'http://localhost:3000';
 const token = JSON.parse(localStorage.getItem("token")) ?? null;
 
 export const loginAccountAuth = async data => {
