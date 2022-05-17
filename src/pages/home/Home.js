@@ -1,6 +1,7 @@
 import React from 'react';
-import HeaderMain from './components/HeaderMain';
+//import HeaderMain from './components/HeaderMain';
 import Footer from '../../components/Footer';
+import SearchMain from './components/SearchMain';
 
 //import { getEscorts } from '../../services/connect'
 
@@ -16,7 +17,8 @@ class Home extends React.Component {
         return ( 
             <React.Fragment>
                 <main className='container-fluid'>
-                    <HeaderMain />
+                    {/*<HeaderMain />*/}
+                    <SearchMain />
                     <article className='row'>
                         {
                             data.map((model,i)=> {                         
@@ -24,7 +26,7 @@ class Home extends React.Component {
                                     <div key={model.User.id} className='card mb-3'  onClick={()=> this.props.history.push(model.User.alias.toLowerCase())}>
                                         <div className="row no-gutters">
                                             <div className="col-4 col-sm-12">
-                                                <img className='img-fluid img-thumbnail' src='https://i.picsum.photos/id/1019/200/300.jpg?hmac=HLUPqgTMOzQ6-GDkgZZ3NXQqJyl5m6iX_MXvS3Xqt3Q' alt={model.User.alias} />
+                                                <img className='img-thumbnail' src='https://i.picsum.photos/id/1019/200/300.jpg?hmac=HLUPqgTMOzQ6-GDkgZZ3NXQqJyl5m6iX_MXvS3Xqt3Q' alt={model.User.alias} />
                                             </div>
                                             <div className='col-8 col-sm-12'>
                                                 <div className='card-body'>
