@@ -8,6 +8,7 @@ import ResetPassword from '../pages/ResetPassword';
 import 'bootstrap/dist/css/bootstrap.css';
 import { getEscorts, getUsers } from '../services/connect';
 import EditUsers from '../pages/protected/admin/pages/EditUsers';
+import UserProfile from '../pages/home/components/UserProfile';
 const Login = React.lazy(() => import('../pages/login/Login'));
 const Register = React.lazy(() => import('../pages/register/Register'));
 const Announce = React.lazy(() => import('../pages/announce/Announce'));
@@ -53,9 +54,10 @@ class Routes extends React.Component {
 
     render() { 
         const {user, users, models} = this.state;
+        
         return ( 
             <BrowserRouter>
-               <Header authed={!!user} user={user} handleLogout={this.handleLogout} />
+               <Header authed={!!user} user={user} users={users} handleLogout={this.handleLogout} />
                 <main>
                     <Switch>
                         <Route exact path='/' render={props => (
@@ -64,6 +66,7 @@ class Routes extends React.Component {
                             />
                         )} 
                         />
+                        {/*<PublicRoute path='/:name' render={UserProfile}/>*/}
                         <Route exact path='/reset-password-request' render={ResetPasswordRequest}/>
                         <PublicRoute exact path='/reset-password' render={ResetPassword}/>
                         <React.Suspense fallback={<p>Loading...</p>}>

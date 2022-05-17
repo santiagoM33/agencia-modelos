@@ -9,12 +9,13 @@ class Header extends React.Component {
         isMobile: true
     }
     render() {
-        let component, { history, authed, handleLogout, user } = this.props;
+        let component, { history, authed, handleLogout, user, users } = this.props;
+        console.log('User: ', users)
         switch (history.location.pathname) {
             case '/':
             case '/login':
             case '/register':
-            case '/announce':
+            //case '/announce':
                 component = <header className='border-bottom border-danger'>
                     <div className="navbar navbar-expand-lg navbar-light bg-light">
                         <h1>
@@ -31,7 +32,7 @@ class Header extends React.Component {
                         >
                         </Hamburguer>
                         <div className="collapse navbar-collapse row" id='navbarNav'>
-                            <div className={`navbar-nav offset-lg-8 container`} >
+                            <div className={`navbar-nav offset-lg-9`} >
                                 {authed === true
                                     ? <>
                                         <NavLink activeClassName='active' className='text-dark col-4 offset-md-3 col-md-3 offset-lg-9 col-lg-1' to='/dashboard'>Dashboard</NavLink>
@@ -45,9 +46,9 @@ class Header extends React.Component {
                                     : <>
                                         <NavLink activeClassName='active' className='text-dark col-4 col-lg-1' to='/login'>Login</NavLink>
                                         <NavLink activeClassName='active' className='text-dark col-4 col-lg-1' to='/register'>Register</NavLink>
-                                        <div className='col-4 col-lg-4'>
+                                        {/*<div className='col-4 col-lg-4'>
                                             <NavLink activeClassName='active' className='text-light btn btn-danger pl-1' to='/announce'>Announce</NavLink>
-                                        </div>
+                                            </div>*/}
                                     </>
                                 }
                             </div>
@@ -97,9 +98,9 @@ class Header extends React.Component {
                                 : <>
                                     <NavLink activeClassName='active' className='text-dark col-4 offset-lg-9 col-lg-1' to='/login'>Login</NavLink>
                                     <NavLink activeClassName='active' className='text-dark col-4 col-lg-1' to='/register'>Register</NavLink>
-                                    <div className='col-4 col-lg-1'>
+                                    {/*<div className='col-4 col-lg-1'>
                                         <NavLink activeClassName='active' className='text-light btn btn-danger pl-1' to='/announce'>Announce</NavLink>
-                                    </div>
+                                    </div>*/}
                                 </>
                             }
                         </div>
@@ -124,7 +125,7 @@ class Header extends React.Component {
                         >
                         </Hamburguer>
                         <div className="collapse navbar-collapse row" id='navbarNav'>
-                            <div className='navbar-nav offset-lg-8'>
+                            <div className='navbar-nav offset-lg-9'>
                                 {authed === true
                                     ? <>
                                         <NavLink activeClassName='active' className='text-dark col-4 col-lg-4' to='/dashboard'>Dashboard</NavLink>
@@ -132,7 +133,7 @@ class Header extends React.Component {
                                             <NavLink className='nav-link text-dark' to='/login'
                                                 onClick={() => {
                                                     handleLogout()
-                                                }
+                                                    }
                                                 }
                                             >Logout</NavLink>
                                         </div>
@@ -140,9 +141,9 @@ class Header extends React.Component {
                                     : <>
                                         <NavLink activeClassName='active' className='text-dark col-4 col-lg-4' to='/login'>Login</NavLink>
                                         <NavLink activeClassName='active' className='text-dark col-4 col-lg-4' to='/register'>Register</NavLink>
-                                        <div className='col-4 col-lg-4'>
+                                        {/*<div className='col-4 col-lg-4'>
                                             <NavLink activeClassName='active' className='text-light btn btn-danger pl-1' to='/announce'>Announce</NavLink>
-                                        </div>
+                                            </div>*/}
                                     </>
                                 }
                             </div>

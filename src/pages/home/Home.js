@@ -1,10 +1,6 @@
 import React from 'react';
 import HeaderMain from './components/HeaderMain';
 import Footer from '../../components/Footer';
-import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
-  } from 'reactstrap';
 
 //import { getEscorts } from '../../services/connect'
 
@@ -13,24 +9,9 @@ class Home extends React.Component {
         users: [],
         isFetch: true
     }
-  
-
-    componentDidMount() {
-        
-    }
     
-    lowerCaseFirstLetter = string => {
-        return string.charAt(0).toLowerCase() + string.substr(1).toLowerCase();
-      }
-  
-    render() {    
-        /*const nombres = this.state.users.map(({user})=> user)
-        const nombresToString = nombres.toString();
-        const enMinuscula = this.lowerCaseFirstLetter(nombresToString)
-        const file = enMinuscula.split(' ').join('-').split(',');*/
-        //.filter(e=>e.roleId === 2) || [];
-   
-        const {data } = this.props.models;
+    render() {   
+        const { data } = this.props.models;
         if(!data) return null;
         return ( 
             <React.Fragment>
@@ -40,15 +21,20 @@ class Home extends React.Component {
                         {
                             data.map((model,i)=> {                         
                                 return <section className='col-12 col-sm-6 col-md-4 my-1' key={model.User.id}>
-                                    <Card key={model.User.id}>
-                                        <CardImg top width="100%" src={model.profilePicture} alt={model.User.alias} />
-                                        <CardBody>
-                                            <CardTitle tag="h5">{model.User.alias}</CardTitle>
-                                            <CardSubtitle tag="h6" className="mb-2 text-muted">{model.location}</CardSubtitle>
-                                            <CardText>{model.User.email}</CardText>
-                                            <Button onClick={()=> this.props.history.push(model.User.alias.toLowerCase())}>Ver mas</Button>
-                                        </CardBody>
-                                    </Card>
+                                    <div key={model.User.id} className='card mb-3'  onClick={()=> this.props.history.push(model.User.alias.toLowerCase())}>
+                                        <div className="row no-gutters">
+                                            <div className="col-4 col-sm-12">
+                                                <img className='img-fluid img-thumbnail' src='https://i.picsum.photos/id/1019/200/300.jpg?hmac=HLUPqgTMOzQ6-GDkgZZ3NXQqJyl5m6iX_MXvS3Xqt3Q' alt={model.User.alias} />
+                                            </div>
+                                            <div className='col-8 col-sm-12'>
+                                                <div className='card-body'>
+                                                    <h5 className='card-title'>{model.User.alias}</h5>
+                                                    <p className="mb-2 text-muted">{model.location}</p>
+                                                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus malesuada porttitor mauris vitae blandit. Curabitur non felis eu nisi maximus dignissim. </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                             </section>                               
                             })
                         }                       
