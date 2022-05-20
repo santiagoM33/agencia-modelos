@@ -65,7 +65,7 @@ class FormLogin extends React.Component {
                         ? <Alert type='danger'>{errors}</Alert>
                         : null
                         }
-                    <div className="col-12 form-group">
+                    <div className="form-group">
                         <input
                             type='email'
                             placeholder='Ingrese su email'
@@ -81,7 +81,7 @@ class FormLogin extends React.Component {
                     </div>
                 </div>
                 <div className='col-12'>
-                    <div className="col-12 form-group">
+                    <div className="form-group">
                         <input
                             type='password'
                             placeholder='Ingrese su password'
@@ -97,14 +97,9 @@ class FormLogin extends React.Component {
                         }
                     </div>
                 </div>
-                <div className='col-12 mb-2'>
-                    <div className="col-12">
-                        <a href='/reset-password-request' className='text-dark font-weight-italic offset-sm-6 offset-lg-8'>You forgot your password?</a>
-                    </div>
-                </div>
                 <div className='col-12'>
-                    <div className="col-12 form-group">
-                        <button type='submit' className='btn btn-danger btn-block'>Ingresar</button>
+                    <div className="form-group">
+                        <button type='submit' className='btn btn-primary btn-block'>Ingresar</button>
                     </div>
                 </div>
             </form>
