@@ -22,6 +22,14 @@ class Register extends React.Component {
                             handleSuccessAuth={this.handleSuccessAuth}
                         />
                     </div>
+                    <div className='container'>
+                        <div className='col-12'>
+                            <p className='my-0'>Already have an account? <a href='/login' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary'>signip</a></p>
+                        </div>
+                        <div className='col-12'>
+                            <p className='my-0'>Forgot your password? <a href='/reset-password-request' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary'>reset your password?</a></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

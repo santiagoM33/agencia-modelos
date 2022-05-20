@@ -104,7 +104,7 @@ class FormRegister extends React.Component {
                     <div className="col-12 form-group">
                         <input 
                             type='text'
-                            placeholder='Ingrese su nombre de usuario'
+                            placeholder='Alias'
                             className='form-control'
 
                             name='alias'
@@ -123,7 +123,7 @@ class FormRegister extends React.Component {
                     <div className="form-group">
                         <input
                             type='email'
-                            placeholder='Ingrese su email'
+                            placeholder='Email'
                             className='form-control col'
 
                             name='email'
@@ -141,7 +141,7 @@ class FormRegister extends React.Component {
                     <div className="form-group">
                         <input 
                             type='password'
-                            placeholder='Escriba un password'
+                            placeholder='Password'
                             className='form-control col'
 
                             name='password'

@@ -25,11 +25,11 @@ class Login extends React.Component {
                             />
                         </div>
                     </div>
-                    <div className='col-12 mb-2'>
-                        <p>New to AT-Pro? <a href='/register' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary'>signup</a></p>
+                    <div className='col-12'>
+                        <p className='my-0'>New to AT-Pro? <a href='/register' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary'>signup</a></p>
                     </div>
-                    <div className='col-12 mb-2'>
-                        <p>Forgot your password? <a href='/reset-password-request' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary'>reset your password?</a></p>
+                    <div className='col-12'>
+                        <p className='my-0'>Forgot your password? <a href='/reset-password-request' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary'>reset your password?</a></p>
                     </div>
                 </div>
             </div>

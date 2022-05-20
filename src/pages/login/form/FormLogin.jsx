@@ -68,7 +68,7 @@ class FormLogin extends React.Component {
                     <div className="form-group">
                         <input
                             type='email'
-                            placeholder='Ingrese su email'
+                            placeholder='Email'
                             className='form-control col'
 
                             name='email'
@@ -84,7 +84,7 @@ class FormLogin extends React.Component {
                     <div className="form-group">
                         <input
                             type='password'
-                            placeholder='Ingrese su password'
+                            placeholder='Password'
                             className='form-control col'
 
                             name='password'
@@ -99,7 +99,7 @@ class FormLogin extends React.Component {
                 </div>
                 <div className='col-12'>
                     <div className="form-group">
-                        <button type='submit' className='btn btn-primary btn-block'>Ingresar</button>
+                        <button type='submit' className='btn btn-primary btn-block'>Signin</button>
                     </div>
                 </div>
             </form>
