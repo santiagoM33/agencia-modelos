@@ -16,26 +16,16 @@ class Register extends React.Component {
     render() { 
         return ( 
             <div className='container'>
-                <div className='offset-md-2 col-md-8 card my-3 mt-sm-5 p-2 shadow rounded-sm'>
-                        {/*<div className='col-12'>
-                            Status: {this.props.loggedInStatus}
-                        </div>*/}
-                    <h3
-                        className='text-center my-3 h5 text-dark'
-                    >Registrar Usuario</h3>
-                    <div
-                        className='col-12'
-                    >
+                <div className='offset-md-2 col-md-8 my-3 mt-sm-5 p-2'>
+                    <div className='col-12'>
                         <FormRegister 
                             handleSuccessAuth={this.handleSuccessAuth}
-                            //fileGrabber={this.props.fileGrabber}
                         />
                     </div>
                 </div>
             </div>
-           
-         );
+        );
     }
 }
- 
+
 export default Register;

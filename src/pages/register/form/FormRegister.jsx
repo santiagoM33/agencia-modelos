@@ -100,12 +100,12 @@ class FormRegister extends React.Component {
         const {aliasError, emailError, passError } = this.state;
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
-                <div className='col-12 input-group'>
+                <div className='input-group'>
                     <div className="col-12 form-group">
                         <input 
                             type='text'
                             placeholder='Ingrese su nombre de usuario'
-                            className='form-control col'
+                            className='form-control'
 
                             name='alias'
                             aria-describedby={'alias-error'} 
@@ -120,7 +120,7 @@ class FormRegister extends React.Component {
                     </div>
                 </div>
                 <div className='col-12'>
-                    <div className="col-12 form-group">
+                    <div className="form-group">
                         <input
                             type='email'
                             placeholder='Ingrese su email'
@@ -138,7 +138,7 @@ class FormRegister extends React.Component {
                     </div>
                 </div>
                 <div className='col-12'>
-                    <div className="col-12 form-group">
+                    <div className="form-group">
                         <input 
                             type='password'
                             placeholder='Escriba un password'
@@ -155,22 +155,15 @@ class FormRegister extends React.Component {
                         }
                     </div>
                 </div>
-                <div className='col-12'>
-                    <div className="col-12 input-group mb-3">
-                        <div className="input-group-prepend">
-                            <label className="input-group-text" htmlFor="inputGroupSelect01">Role</label>
-                        </div>
-                        <select className="custom-select" id="inputGroupSelect01" onChange={this._handleChange}>
-                            <option defaultValue>Choose...</option>
-                            <option value="1">Admin</option>
-                            <option value="2">Model</option>
-                            <option value="3">User</option>
-                        </select>
-                     </div>
+                <div className='col-12 mb-3 mx-1'>
+                    <div className='container'>
+                            <button type='button' className='btn btn-outline-primary btn-block col-6' onClick={this._handleChange}>User</button>
+                            <button type='button' className='btn btn-outline-primary col-6' onClick={this._handleChange}>Escort</button>
+                    </div>
                 </div>
                 <div className='col'>
-                    <div className='col-12 mb-3'>
-                        <button type='submit' className='btn-danger btn-block'>Registrarse</button>
+                    <div className=' mb-3'>
+                        <button type='submit' className='btn-primary btn-block'>Registrarse</button>
                     </div>
                 </div>
             </form>
