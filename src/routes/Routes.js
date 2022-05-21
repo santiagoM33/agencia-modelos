@@ -67,8 +67,8 @@ class Routes extends React.Component {
                         )} 
                         />
                         {/*<PublicRoute path='/:name' render={UserProfile}/>*/}
-                        <Route exact path='/reset-password-request' render={ResetPasswordRequest}/>
-                        <PublicRoute exact path='/reset-password' render={ResetPassword}/>
+                        <Route exact path='/reset-password-request' component={ResetPasswordRequest}/>
+                        <PublicRoute exact path='/reset-password' component={ResetPassword}/>
                         <React.Suspense fallback={<p>Loading...</p>}>
                             <Route exact path="/login" component={ publicProps => (
                                 <Login {...publicProps}
@@ -85,12 +85,11 @@ class Routes extends React.Component {
                             )}
                             />
                             <Route exact path="/announce" component={ publicProps => (
-                               <Announce {...publicProps}
-                                    //user={this.state.user}
-                                    //handleLogin={this.handleLogin}
-                                />
-                            )}                         
-                            />
+                                <Announce {...publicProps}
+                                        //user={this.state.user}
+                                        //handleLogin={this.handleLogin}
+                                    />
+                                )}/>
                             <PrivateRoute exact path="/admin" authed={!!user} component={ privateProps => (
                                 <Admin {...privateProps}
                                     user={user}

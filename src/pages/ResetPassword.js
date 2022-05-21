@@ -41,36 +41,30 @@ export default class ResetPassword extends React.Component {
       <>
         <Redirect to={this.state.to}></Redirect>
 
-        <div className='container-fluid'>
-          <hr className="mb-4" />
-
-          <h3
-            className='text-center mb-4 h4'
-          >Reset your password</h3>
-
+        <div className='container-fluid mt-4'>
           <form action="">
             <div className="form-group">
-              <label htmlFor="reset-email">Email address</label>
               <input type="email" className="form-control" id="reset-email" onChange={this.onInputChange}
-                aria-describedby="emailHelp" placeholder="Enter email" name="email" value={this.state.email} />
+                aria-describedby="emailHelp" placeholder="Email" name="email" value={this.state.email} />
             </div>
 
             <div className="form-group">
-              <label htmlFor="reset-password">New password</label>
               <input type="password" className="form-control" id="reset-password" onChange={this.onInputChange}
-                placeholder="Enter new password" name="password" />
+                placeholder="New Password" name="password" />
             </div>
 
             <div className="form-group">
-              <label htmlFor="reset-code">Code</label>
               <input type="number" className="form-control" id="reset-code" onChange={this.onInputChange}
-                placeholder="Enter code" name="code" />
+                placeholder="Reset Code" name="code" />
             </div>
 
-            <button type="button" className="btn btn-primary btn-block text-uppercase"
+            <button type="button" className="btn btn-primary btn-block"
               onClick={this.reset}>Reset Password</button>
           </form>
-
+          <div className='mt-3'>
+              <p className='my-0'>New to AT-Pro? <a href='/register' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary text-decoration-none'>signup</a></p>
+              <p className='my-0'>Remember your password? <a href='/login' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary text-decoration-none'>signin</a></p>
+          </div>
         </div>
       </>
     )

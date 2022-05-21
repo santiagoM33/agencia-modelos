@@ -90,9 +90,7 @@ class FormRegister extends React.Component {
         }
     }
 
-    _handleChange = e => {
-        this.setState({roleId: e.target.value})
-    }
+    _handleClick = e => this.setState({roleId: e.target.value})
 
     componentWillUnmount(){this.controller.abort()}
 
@@ -157,13 +155,13 @@ class FormRegister extends React.Component {
                 </div>
                 <div className='col-12 mb-3 mx-1'>
                     <div className='container'>
-                            <button type='button' className='btn btn-outline-primary btn-block col-6' onClick={this._handleChange}>User</button>
-                            <button type='button' className='btn btn-outline-primary col-6' onClick={this._handleChange}>Escort</button>
+                            <input type='button' className='btn btn-outline-primary btn-block col-6' onClick={this._handleClick} value='user' />
+                            <input type='button' className='btn btn-outline-primary col-6' onClick={this._handleClick} value='escort' />
                     </div>
                 </div>
                 <div className='col'>
                     <div className=' mb-3'>
-                        <button type='submit' className='btn-primary btn-block'>Registrarse</button>
+                        <button type='submit' className='btn-primary btn-block'>Signup</button>
                     </div>
                 </div>
             </form>
