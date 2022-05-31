@@ -38,6 +38,7 @@ export default class ResetPasswordRequest extends React.Component {
   }
 
   render() {
+    console.log('Redirect: ', this.state.to)
     return (
       <>
         <Redirect to={this.state.to}></Redirect>

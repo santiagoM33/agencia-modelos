@@ -1,7 +1,7 @@
 import React from 'react';
 import MainImg from './components/MainImg.components';
 import ProfileForm from './components/ProfileForm.components';
-//import Services from './components/Services.components';
+import Services from './components/Services.components';
 
 class Profile extends React.Component {
     state = {  } 
@@ -11,7 +11,7 @@ class Profile extends React.Component {
                 <MainImg />
                 <section className='container'>
                     <ProfileForm />
-                    {/*<Services />*/}
+                    <Services />
                 </section>
             </article>
         );

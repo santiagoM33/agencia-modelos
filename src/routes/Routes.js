@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { getEscorts, getUsers } from '../services/connect';
 import EditUsers from '../pages/protected/admin/pages/EditUsers';
 import UserProfile from '../pages/home/components/UserProfile';
+import MenuInside from '../pages/protected/menu/MenuInside.protected';
 const Profile = React.lazy(() => import('../pages/protected/profile/Profile.protected'));
 const Login = React.lazy(() => import('../pages/login/Login'));
 const Register = React.lazy(() => import('../pages/register/Register'));
@@ -69,7 +70,7 @@ class Routes extends React.Component {
                         />
                         {/*<PublicRoute path='/:name' render={UserProfile}/>*/}
                         <Route exact path='/reset-password-request' component={ResetPasswordRequest}/>
-                        <PublicRoute exact path='/reset-password' component={ResetPassword}/>
+                        <Route exact path='/reset-password' component={ResetPassword}/>
                         <React.Suspense fallback={<p>Loading...</p>}>
                             <Route exact path="/login" component={ publicProps => (
                                 <Login {...publicProps}
@@ -114,6 +115,12 @@ class Routes extends React.Component {
                             />  
                             <PrivateRoute exact path="/profile" authed={!!user} component={ privateProps => (
                                 <Profile {...privateProps}
+                                    user={user}
+                                />
+                            )}
+                            />  
+                            <PrivateRoute exact path="/menu" authed={!!user} component={ privateProps => (
+                                <MenuInside {...privateProps}
                                     user={user}
                                 />
                             )}

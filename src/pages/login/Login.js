@@ -8,8 +8,10 @@ class Login extends React.Component {
         this.props.handleLogin(data)
         if (data.user.roleId === 1) {
             this.props.history.push('admin')
-        } else {
+        } else if (data.user.roleId === 2 && data.user.roleId === 3) {
             this.props.history.push('dashboard')
+        } else {
+            console.log('Problemas con esta pagina')
         }
     }
 
