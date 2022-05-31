@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { getEscorts, getUsers } from '../services/connect';
 import EditUsers from '../pages/protected/admin/pages/EditUsers';
 import UserProfile from '../pages/home/components/UserProfile';
+const Profile = React.lazy(() => import('../pages/protected/profile/Profile.protected'));
 const Login = React.lazy(() => import('../pages/login/Login'));
 const Register = React.lazy(() => import('../pages/register/Register'));
 const Announce = React.lazy(() => import('../pages/announce/Announce'));
@@ -108,6 +109,12 @@ class Routes extends React.Component {
                                     //role={this.state.role}
                                     //pagination={this.state.pagination}
                                     //handleLogout={this.handleLogout}
+                                />
+                            )}
+                            />  
+                            <PrivateRoute exact path="/profile" authed={!!user} component={ privateProps => (
+                                <Profile {...privateProps}
+                                    user={user}
                                 />
                             )}
                             />  

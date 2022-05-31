@@ -10,7 +10,6 @@ class Header extends React.Component {
     }
     render() {
         let component, { history, authed, handleLogout, user, users } = this.props;
-        console.log('User: ', users)
         switch (history.location.pathname) {
             case '/':
             case '/login':

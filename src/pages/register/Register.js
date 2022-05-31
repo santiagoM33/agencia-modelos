@@ -24,10 +24,10 @@ class Register extends React.Component {
                     </div>
                     <div className='container'>
                         <div className='col-12'>
-                            <p className='my-0'>Already have an account? <a href='/login' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary text-decoration-none'>signin</a></p>
+                            <p className='my-0'>Already have an account? <a href='/login' className='font-weight-italic text-primary text-decoration-none'>signin</a></p>
                         </div>
                         <div className='col-12'>
-                            <p className='my-0'>Forgot your password? <a href='/reset-password-request' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary text-decoration-none'>reset your password?</a></p>
+                            <p className='my-0'>Forgot your password? <a href='/reset-password-request' className='font-weight-italic text-primary text-decoration-none'>reset your password?</a></p>
                         </div>
                     </div>
                 </div>
