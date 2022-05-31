@@ -1,5 +1,6 @@
 import React from 'react';
 import FormLogin from './form/FormLogin';
+import { Toaster } from 'react-hot-toast';
 
 class Login extends React.Component {
 
@@ -8,7 +9,7 @@ class Login extends React.Component {
         this.props.handleLogin(data)
         if (data.user.roleId === 1) {
             this.props.history.push('admin')
-        } else if (data.user.roleId === 2 && data.user.roleId === 3) {
+        } else if (data.user.roleId === 2 || data.user.roleId === 3) {
             this.props.history.push('dashboard')
         } else {
             console.log('Problemas con esta pagina')
