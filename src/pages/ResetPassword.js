@@ -16,7 +16,8 @@ function Redirect({ to }) {
 export default class ResetPassword extends React.Component {
     state = {
       email: '',
-      to: null
+      to: null,
+      code: Number(this.props.location.search.slice(6).split('&')[0]) == 0 ?? ''
     }
 
   onInputChange = e => {
@@ -38,11 +39,11 @@ export default class ResetPassword extends React.Component {
 
   render() {
     return (
-      <>
+      <div className='container'>
         <Redirect to={this.state.to}></Redirect>
 
-        <div className='container-fluid mt-4'>
-          <form action="">
+        <div className='offset-md-2 col-md-8 my-3 mt-sm-5 p-2'>
+          <form action="" className=' mt-4'>
             <div className="form-group">
               <input type="email" className="form-control" id="reset-email" onChange={this.onInputChange}
                 aria-describedby="emailHelp" placeholder="Email" name="email" value={this.state.email} />
@@ -55,18 +56,18 @@ export default class ResetPassword extends React.Component {
 
             <div className="form-group">
               <input type="number" className="form-control" id="reset-code" onChange={this.onInputChange}
-                placeholder="Reset Code" name="code" />
+                placeholder="Reset Code" name="code" value={this.state.code}/>
             </div>
 
             <button type="button" className="btn btn-primary btn-block"
               onClick={this.reset}>Reset Password</button>
           </form>
           <div className='mt-3'>
-              <p className='my-0'>New to AT-Pro? <a href='/register' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary text-decoration-none'>signup</a></p>
-              <p className='my-0'>Remember your password? <a href='/login' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary text-decoration-none'>signin</a></p>
+              <p className='my-0'>New to AT-Pro? <a href='/register' className='font-weight-italic text-primary text-decoration-none'>signup</a></p>
+              <p className='my-0'>Remember your password? <a href='/login' className='font-weight-italic text-primary text-decoration-none'>signin</a></p>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }

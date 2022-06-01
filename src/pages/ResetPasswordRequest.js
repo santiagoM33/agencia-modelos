@@ -38,12 +38,11 @@ export default class ResetPasswordRequest extends React.Component {
   }
 
   render() {
-    console.log('Redirect: ', this.state.to)
     return (
-      <>
+      <div className='container'>
         <Redirect to={this.state.to}></Redirect>
 
-        <div className='container-fluid'>
+        <div className='offset-md-2 col-md-8 my-3 mt-sm-5 p-2'>
           <form action="" className='mt-4'>
             <div className="form-group">
               <input type="email" className="form-control" value={this.state.email} onChange={this.onEmailChange}
@@ -54,11 +53,11 @@ export default class ResetPasswordRequest extends React.Component {
               onClick={this.requestReset} /* disabled={!this.state.email} */>Recover Password</button>
           </form>
           <div className='mt-3'>
-              <p className='my-0'>New to AT-Pro? <a href='/register' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary text-decoration-none'>signup</a></p>
-              <p className='my-0'>Remember your password? <a href='/login' className='font-weight-italic offset-sm-6 offset-lg-8 text-primary text-decoration-none'>signin</a></p>
+              <p className='my-0'>New to AT-Pro? <a href='/register' className='font-weight-italic text-primary text-decoration-none'>signup</a></p>
+              <p className='my-0'>Remember your password? <a href='/login' className='font-weight-italic text-primary text-decoration-none'>signin</a></p>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }
