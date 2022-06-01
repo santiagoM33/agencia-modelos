@@ -41,7 +41,7 @@ class FormLogin extends React.Component {
                         localStorage.setItem("token", JSON.stringify(res.token));
                         localStorage.setItem("user", JSON.stringify(res.user));
                         this.props.handleSuccessAuth(res);
-                        toast.success('Signin success');
+                        toast.success('Sign in success');
                         this.setState({
                             errors: [],
                         });
@@ -103,7 +103,6 @@ class FormLogin extends React.Component {
                 <div className='col-12'>
                     <div className="form-group">
                         <button type='submit' className='btn btn-primary btn-block' onClick={this.onHandleSubmit}>Signin</button>
-                        <Toaster />
                     </div>
                 </div>
             </form>
