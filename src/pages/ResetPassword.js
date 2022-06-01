@@ -1,6 +1,6 @@
 import React from 'react';
 import { resetPassword } from '../services/connect';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { Redirect as RouterRedirect } from 'react-router-dom';
  
 function Redirect({ to }) {
@@ -17,7 +17,7 @@ export default class ResetPassword extends React.Component {
     state = {
       email: '',
       to: null,
-      code: Number(this.props.location.search.slice(6).split('&')[0]) == 0 ?? ''
+      code: Number(this.props.location.search.slice(6).split('&')[0])
     }
 
   onInputChange = e => {
@@ -61,6 +61,7 @@ export default class ResetPassword extends React.Component {
 
             <button type="button" className="btn btn-primary btn-block"
               onClick={this.reset}>Reset Password</button>
+              <Toaster />
           </form>
           <div className='mt-3'>
               <p className='my-0'>New to AT-Pro? <a href='/register' className='font-weight-italic text-primary text-decoration-none'>signup</a></p>

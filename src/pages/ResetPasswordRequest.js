@@ -1,7 +1,7 @@
 import React from 'react';
 import { resetPasswordRequest } from '../services/connect';
 import { Redirect as RouterRedirect } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Redirect({ to }) {
   if (to) {
@@ -51,6 +51,7 @@ export default class ResetPasswordRequest extends React.Component {
 
             <button type="button" className="btn btn-primary btn-block"
               onClick={this.requestReset} /* disabled={!this.state.email} */>Recover Password</button>
+              <Toaster />
           </form>
           <div className='mt-3'>
               <p className='my-0'>New to AT-Pro? <a href='/register' className='font-weight-italic text-primary text-decoration-none'>signup</a></p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import SpanError from '../../../components/SpanError';
 import { Alert } from '../../../components/Alert';
 
@@ -38,10 +38,10 @@ class FormLogin extends React.Component {
             if (errors.length === 0) {
                 loginAccountAuth({ email, password })
                     .then((res) => {
-                        toast.success('The password has been changed');
                         localStorage.setItem("token", JSON.stringify(res.token));
                         localStorage.setItem("user", JSON.stringify(res.user));
                         this.props.handleSuccessAuth(res);
+                        toast.success('Signin success');
                         this.setState({
                             errors: [],
                         });
@@ -102,7 +102,8 @@ class FormLogin extends React.Component {
                 </div>
                 <div className='col-12'>
                     <div className="form-group">
-                        <button type='submit' className='btn btn-primary btn-block'>Signin</button>
+                        <button type='submit' className='btn btn-primary btn-block' onClick={this.onHandleSubmit}>Signin</button>
+                        <Toaster />
                     </div>
                 </div>
             </form>

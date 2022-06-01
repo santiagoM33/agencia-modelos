@@ -168,7 +168,7 @@ class FormRegister extends React.Component {
                 </div>
                 <div className='col'>
                     <div className=' mb-3'>
-                        <button type='submit' className='btn-primary btn-block'>Signup</button>
+                        <button type='submit' className='btn-primary btn-block' onClick={this.onHandleSubmit}>Signup</button>
                     </div>
                 </div>
             </form>
