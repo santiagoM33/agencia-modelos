@@ -1,6 +1,5 @@
 import React from 'react';
-import toast, { Toaster } from 'react-hot-toast';
-import SpanError from '../../../components/SpanError';
+import toast from 'react-hot-toast';
 import { Alert } from '../../../components/Alert';
 
 import { loginAccountAuth } from "../../../services/connect";
@@ -10,24 +9,16 @@ class FormLogin extends React.Component {
     state = {
         email: '',
         password: '',
-        emailError: false,
-        passwordError: false,
-        hasError: false,
         errors: []
     }
 
     onHandleChange = e => {
         if (e.target.name === 'email') {
             this.setState({email: e.target.value})
+            this.setState({errors: []})
         } else {
-            if (e.target.value.length < 6) {
-                this.setState({passwordError: true})
-                
-            } else {
-                this.setState({passwordError: false})
-                this.setState({password: e.target.value})
-                this.setState({errors: []})
-            }
+            this.setState({password: e.target.value})
+            this.setState({errors: []})
         }
     }
     
@@ -60,13 +51,13 @@ class FormLogin extends React.Component {
     setMessage = err => {return { loginMessage: err }}
 
     render() {
-        const {emailError, passwordError, errors} = this.state;
+        const { errors } = this.state;
         return (
             <form onSubmit={this.onHandleSubmit}>
                 <div className='col-12'>
                         {errors.length
-                        ? <Alert type='danger'>{errors}</Alert>
-                        : null
+                            ? <Alert type='danger'>{errors}</Alert>
+                            : null
                         }
                     <div className="form-group">
                         <input
@@ -78,9 +69,6 @@ class FormLogin extends React.Component {
                             aria-describedby={'email-error'} 
                             onChange={this.onHandleChange}
                         />
-                        { emailError &&
-                            <SpanError id='email-error'>El email es invalido.</SpanError>
-                        }
                     </div>
                 </div>
                 <div className='col-12'>
@@ -90,14 +78,12 @@ class FormLogin extends React.Component {
                             placeholder='Password'
                             className='form-control col'
 
+                            value={this.state.password}
                             name='password'
                             aria-describedby={'pass-error'} 
 
                             onChange={this.onHandleChange}
                         />
-                        { passwordError &&
-                            <SpanError id='pass-error'>El password es invalido.</SpanError>
-                        }
                     </div>
                 </div>
                 <div className='col-12'>

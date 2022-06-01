@@ -20,10 +20,6 @@ class FormRegister extends React.Component {
     }
 
     controller = new AbortController();
-        
-    componentDidMount(){
-        getRoles(this.controller.signal).then(res=>console.log(res))
-    }
  
     _onHandleChange = e => {
         switch (e.target.name) {
@@ -64,8 +60,6 @@ class FormRegister extends React.Component {
     isMatch = param => {
         if (param.alias.length > 0 && param.email.length > 0 && param.password.length > 0) {
             const {alias, email, password, roleId} = param;
-            //let fileName = `${firstName} ${lastName}`;
-            //this.props.fileGrabber(fileName)
             registerDataAccount({
                 alias,
                 email,
