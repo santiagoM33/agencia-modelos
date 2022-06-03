@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { PublicRoute, PrivateRoute } from '../helpers/routeRedirectAuth';
-import Header from '../components/Header';
+import HeaderMenu from '../pages/protected/menu/HeaderMenu';
 import Home from '../pages/home/Home';
 import ResetPasswordRequest from '../pages/ResetPasswordRequest';
 import ResetPassword from '../pages/ResetPassword';
@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { getEscorts, getUsers } from '../services/connect';
 import EditUsers from '../pages/protected/admin/pages/EditUsers';
 import UserProfile from '../pages/home/components/UserProfile';
-import MenuInside from '../pages/protected/menu/MenuInside.protected';
 const Profile = React.lazy(() => import('../pages/protected/profile/Profile.protected'));
 const Login = React.lazy(() => import('../pages/login/Login'));
 const Register = React.lazy(() => import('../pages/register/Register'));
@@ -59,7 +58,7 @@ class Routes extends React.Component {
         
         return ( 
             <BrowserRouter>
-               <Header authed={!!user} user={user} users={users} handleLogout={this.handleLogout} />
+               <HeaderMenu authed={!!user} user={user} users={users} handleLogout={this.handleLogout} />
                 <main>
                     <Switch>
                         <Route exact path='/' render={props => (
@@ -118,13 +117,7 @@ class Routes extends React.Component {
                                     user={user}
                                 />
                             )}
-                            />  
-                            <PrivateRoute exact path="/menu" authed={!!user} component={ privateProps => (
-                                <MenuInside {...privateProps}
-                                    user={user}
-                                />
-                            )}
-                            />  
+                            />
                             <PrivateRoute exact path="/users/:userId" authed={!!user} component={ privateProps => (
                                 <EditUsers {...privateProps}
                                     //token={this.state.token}

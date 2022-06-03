@@ -16,11 +16,11 @@ class Header extends React.Component {
             case '/login':
             case '/register':
             //case '/announce':
-                component = <header className='border-bottom border-danger'>
+                /*component = <header className='border-bottom border-danger'>
                     <div className="navbar navbar-expand-lg navbar-light bg-light">
                         <h1>
                             <Link className="navbar-brand text-dark" to="/">
-                                {/*<img src={logo} width="90" height="60"></img>*/}
+                                
                                 <h1 className='text-danger'><span className='text-primary'>A</span>M</h1>
                             </Link>
                         </h1>
@@ -46,15 +46,12 @@ class Header extends React.Component {
                                     : <>
                                         <NavLink activeClassName='active' className='text-dark col-4 col-lg-1' to='/login'>Login</NavLink>
                                         <NavLink activeClassName='active' className='text-dark col-4 col-lg-1' to='/register'>Register</NavLink>
-                                        {/*<div className='col-4 col-lg-4'>
-                                            <NavLink activeClassName='active' className='text-light btn btn-danger pl-1' to='/announce'>Announce</NavLink>
-                                            </div>*/}
                                     </>
                                 }
                             </div>
                         </div>
                     </div>
-                </header>
+                </header>*/
                 break;
             case '/dashboard':
             case '/profile':
@@ -98,9 +95,6 @@ class Header extends React.Component {
                                 : <>
                                     <NavLink activeClassName='active' className='text-dark col-4 offset-lg-9 col-lg-1' to='/login'>Login</NavLink>
                                     <NavLink activeClassName='active' className='text-dark col-4 col-lg-1' to='/register'>Register</NavLink>
-                                    {/*<div className='col-4 col-lg-1'>
-                                        <NavLink activeClassName='active' className='text-light btn btn-danger pl-1' to='/announce'>Announce</NavLink>
-                                    </div>*/}
                                 </>
                             }
                         </div>
@@ -128,9 +122,9 @@ class Header extends React.Component {
                             <div className='navbar-nav offset-lg-9'>
                                 {authed === true
                                     ? <>
-                                        <NavLink activeClassName='active' className='text-dark col-4 col-lg-4' to='/dashboard'>Dashboard</NavLink>
+                                        <NavLink activeClassName='active' className='text-dark col-4 col-lg-1 mt-2' to='/dashboard'>Dashboard</NavLink>
                                         <div className='col-4 col-lg-4'>
-                                            <NavLink className='nav-link text-dark' to='/login'
+                                            <NavLink className='nav-link text-dark col-4 col-lg-1' to='/login'
                                                 onClick={() => {
                                                     handleLogout()
                                                     }
@@ -141,9 +135,6 @@ class Header extends React.Component {
                                     : <>
                                         <NavLink activeClassName='active' className='text-dark col-4 col-lg-1' to='/login'>Login</NavLink>
                                         <NavLink activeClassName='active' className='text-dark col-4 col-lg-1' to='/register'>Register</NavLink>
-                                        {/*<div className='col-4 col-lg-4'>
-                                            <NavLink activeClassName='active' className='text-light btn btn-danger pl-1' to='/announce'>Announce</NavLink>
-                                            </div>*/}
                                     </>
                                 }
                             </div>
