@@ -16,15 +16,13 @@ class HeaderMenu extends React.Component {
             case '/':
             case '/login':
             case '/register':
-                component = <>
-                    {MenuOutsideData.map((item, index) => (
+                component = MenuOutsideData.map((item, index) => (
                         <li key={index} className={item.cName}>
                             <Link to={item.path}>
                                 <span onClick={this.showSidebar}>{item.title}</span>
                             </Link>
                         </li>
-                    ))}
-                </>
+                    ))
             break;
             case '/dashboard':
             case '/gallery':
@@ -46,37 +44,30 @@ class HeaderMenu extends React.Component {
             break;
             case '/admin':
                 component = <> 
-                {authed && user.user.roleId === 1 &&
-                    MenuInsideAdmin.map((item, index) => (
-                        <li key={index} className={item.cName}>
-                            <Link to={item.path}>
-                                <span onClick={this.showSidebar}>{item.title}</span>
+                    {authed && user.user.roleId === 1 &&
+                        MenuInsideAdmin.map((item, index) => (
+                            <li key={index} className={item.cName}>
+                                <Link to={item.path}>
+                                    <span onClick={this.showSidebar}>{item.title}</span>
+                                </Link>
+                            </li>
+                        ))
+                    }
+                        <li className='nav-text'>
+                            <Link to='/login' onClick={handleLogout}>
+                                <span onClick={this.showSidebar}>Logout</span>
                             </Link>
                         </li>
-                    ))
-                }
-                    <li className='nav-text'>
-                        <Link to='/login' onClick={handleLogout}>
-                            <span onClick={this.showSidebar}>Logout</span>
-                        </Link>
-                    </li>
                 </>
             break;
             default:
-                component = <>
-                {MenuInsideUser.map((item, index) => (
-                    <li key={index} className={item.cName}>
-                        <Link to={item.path} onClick={handleLogout}>
-                            <span onClick={this.showSidebar}>{item.title}</span>
-                        </Link>
-                    </li>
-                ))}
-                    <li className='nav-text'>
-                        <Link to='/login' onClick={handleLogout}>
-                            <span onClick={this.showSidebar}>Logout</span>
-                        </Link>
-                    </li>
-                </>
+                component = MenuOutsideData.map((item, index) => (
+                                <li key={index} className={item.cName}>
+                                    <Link to={item.path} onClick={handleLogout}>
+                                        <span onClick={this.showSidebar}>{item.title}</span>
+                                    </Link>
+                                </li>
+                            ))
             break;
         }
         return (
@@ -96,9 +87,7 @@ class HeaderMenu extends React.Component {
                         </Link>
                     </li>
                 </ul>
-                { 
-                    component
-                }
+                { component }
             </nav>
         </aside>
         );
