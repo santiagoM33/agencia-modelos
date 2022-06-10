@@ -32,13 +32,18 @@ export const MenuInsideEscort = [
 
 export const MenuInsideAdmin = [
     {
-        title: 'Admin',
+        title: 'Users',
         path: '/admin',
         cName: 'nav-text'
     },
     {
-        title: 'Dashboard',
-        path: '/dashboard',
+        title: 'Services',
+        path: '/services',
+        cName: 'nav-text'
+    },
+    {
+        title: 'Catalog',
+        path: '/catalog',
         cName: 'nav-text'
     }
 ]

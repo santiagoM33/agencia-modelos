@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { getEscorts, getUsers } from '../services/connect';
 import EditUsers from '../pages/protected/admin/pages/EditUsers';
 import UserProfile from '../pages/home/components/UserProfile';
+import Catalog from '../pages/protected/catalog/Catalog';
 const Profile = React.lazy(() => import('../pages/protected/profile/Profile.protected'));
 const Login = React.lazy(() => import('../pages/login/Login'));
 const Register = React.lazy(() => import('../pages/register/Register'));
@@ -117,6 +118,10 @@ class Routes extends React.Component {
                                     user={user}
                                 />
                             )}
+                            />
+                            <PrivateRoute exact path="/catalog" authed={!!user} component={ privateProps => (
+                                <Catalog {...privateProps}/>
+                            )}                    
                             />
                             <PrivateRoute exact path="/users/:userId" authed={!!user} component={ privateProps => (
                                 <EditUsers {...privateProps}

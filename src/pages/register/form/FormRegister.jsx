@@ -16,11 +16,14 @@ class FormRegister extends React.Component {
         //Manejo de errores generales
         hasError: false,
         //Login
-        isLogin: false
+        isLogin: false,
+        //Style
+        isActiveU: false,
+        isActiveE: false
     }
 
     controller = new AbortController();
- 
+    
     _onHandleChange = e => {
         switch (e.target.name) {
             case 'alias':
@@ -87,16 +90,19 @@ class FormRegister extends React.Component {
     _handleClick = e => {
         if( e.target.value === 'user') {
             this.setState({roleId: 3})
+            this.setState({isActiveU: true})
+            this.setState({isActiveE: false})
         } else {
             this.setState({roleId: 2})
+            this.setState({isActiveE: true})
+            this.setState({isActiveU: false})
         }
-
     }
 
     componentWillUnmount(){this.controller.abort()}
 
     render() {
-        const {aliasError, emailError, passError } = this.state;
+        const {aliasError, emailError, passError, isActiveU, isActiveE } = this.state;
         return (
             <form onSubmit={this.onHandleSubmit.bind(this)}>
                 <div className='input-group'>
@@ -156,8 +162,8 @@ class FormRegister extends React.Component {
                 </div>
                 <div className='col-12 mb-3 mx-1'>
                     <div className='container'>
-                        <input type='button' className='btn btn-outline-primary btn-block col-6' onClick={this._handleClick} value='user' />
-                        <input type='button' className='btn btn-outline-primary col-6' onClick={this._handleClick} value='escort' />
+                        <input type='button' className={`btn btn-outline-primary btn-block col-6 ${isActiveU ? 'h-primary' : ''}`} onClick={this._handleClick} value='user' />
+                        <input type='button' className={`btn btn-outline-primary col-6 ${isActiveE ? 'h-primary' : ''}`} onClick={this._handleClick} value='escort' />
                     </div>
                 </div>
                 <div className='col'>
