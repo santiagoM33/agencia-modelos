@@ -40,11 +40,6 @@ export const MenuInsideAdmin = [
         title: 'Services',
         path: '/services',
         cName: 'nav-text'
-    },
-    {
-        title: 'Catalog',
-        path: '/catalog',
-        cName: 'nav-text'
     }
 ]
 

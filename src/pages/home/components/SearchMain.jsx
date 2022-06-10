@@ -1,11 +1,14 @@
 import React from 'react';
+import Logo from './Logo';
+import Search from './Search';
 
 class SearchMain extends React.Component {
     state = {}
     render() {
         return (
-            <div className="form-group mt-3 offset-6">
-                <input type="text" className="form-control col-12" aria-describedby="emailHelp" placeholder='search...'/>
+            <div className='d-flex justify-content-center align-items-center'>
+                <Logo name='Catalog'/>
+                <Search />
             </div>
         );
     }

@@ -25,7 +25,7 @@ class HeaderMenu extends React.Component {
                     ))
             break;
             case '/dashboard':
-            case '/gallery':
+            case '/catalog':
             case '/profile':
                 component = <> 
                     {authed && MenuInsideEscort.map((item, index) => (
@@ -43,6 +43,7 @@ class HeaderMenu extends React.Component {
                 </>
             break;
             case '/admin':
+            case '/services':
                 component = <> 
                     {authed && user.user.roleId === 1 &&
                         MenuInsideAdmin.map((item, index) => (
