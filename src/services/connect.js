@@ -134,7 +134,7 @@ export const updateStatus = async (id, status) => {
             'Authorization': `Bearer ${accessToken}`, 
             'Content-type': 'application/json'
         }),
-        body: JSON.stringify(status)
+        body: status
         
     }
     const promise = new Promise(async (response, reject) => {

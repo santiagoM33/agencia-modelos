@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { PublicRoute, PrivateRoute } from '../helpers/routeRedirectAuth';
+import { PrivateRoute } from '../helpers/routeRedirectAuth';
 import HeaderMenu from '../pages/protected/menu/HeaderMenu';
 import Home from '../pages/home/Home';
 import ResetPasswordRequest from '../pages/ResetPasswordRequest';
@@ -8,7 +8,7 @@ import ResetPassword from '../pages/ResetPassword';
 import 'bootstrap/dist/css/bootstrap.css';
 import { getEscorts, getUsers } from '../services/connect';
 import EditUsers from '../pages/protected/admin/pages/EditUsers';
-import UserProfile from '../pages/home/components/UserProfile';
+//import UserProfile from '../pages/home/components/UserProfile';
 import Catalog from '../pages/protected/catalog/Catalog';
 const Profile = React.lazy(() => import('../pages/protected/profile/Profile.protected'));
 const Login = React.lazy(() => import('../pages/login/Login'));

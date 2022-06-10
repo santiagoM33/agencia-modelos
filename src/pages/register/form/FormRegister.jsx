@@ -1,7 +1,7 @@
 import React from 'react';
 import SpanError from '../../../components/SpanError';
 
-import { getRoles, registerDataAccount } from "../../../services/connect";
+import { registerDataAccount } from "../../../services/connect";
 
 class FormRegister extends React.Component {
     state= {

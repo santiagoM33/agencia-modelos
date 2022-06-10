@@ -1,6 +1,11 @@
 
 export const MenuOutsideData = [
     {
+        title: 'Home',
+        path: '/',
+        cName: 'nav-text'
+    },
+    {
         title: 'Login',
         path: '/login',
         cName: 'nav-text'

@@ -1,17 +1,24 @@
 import React from 'react';
 import './MenuInside.css';
 import { withRouter, Link } from 'react-router-dom';
-import { MenuInsideAdmin, MenuInsideEscort, MenuInsideUser, MenuOutsideData } from './MenuData'
+import { MenuInsideAdmin, MenuInsideEscort, MenuOutsideData } from './MenuData'
 
 class HeaderMenu extends React.Component {
     state = {
-        sidebar: false
+        sidebar: false,
+        roleId: 0
+    }
+
+    getRoleId = () => this.setState({roleId: Number(JSON.parse(localStorage.getItem("user")).roleId)})
+
+    componentDidMount(){
+        this.getRoleId()
     }
 
     showSidebar = () => this.setState({sidebar: !this.state.sidebar})
     
     render() { 
-        let component, {authed, handleLogout, user} = this.props;
+        let component, {authed, handleLogout} = this.props;
         switch (this.props.location.pathname) {
             case '/':
             case '/login':
@@ -45,7 +52,7 @@ class HeaderMenu extends React.Component {
             case '/admin':
             case '/services':
                 component = <> 
-                    {authed && user.user.roleId === 1 &&
+                    {authed && this.state.roleId === 1 &&
                         MenuInsideAdmin.map((item, index) => (
                             <li key={index} className={item.cName}>
                                 <Link to={item.path}>

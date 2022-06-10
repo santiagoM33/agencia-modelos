@@ -5,7 +5,6 @@ import TableUsers from './components/TableUsers';
 
 class Admin extends React.Component {
     state = {
-        modal: false,
         currentPage: 1,
         postPerPage: 5,
         totalPages: 0,
@@ -20,11 +19,6 @@ class Admin extends React.Component {
         getUsers(this.controller.signal).then(res=>this.setState({usersAdmin: res.data, loading: false}))
     }
 
-    /*--------- MODAL------- */
-    toggleModal = () => {
-        this.setState({modal: !this.state.modal})
-    }
-
     handleChange = e =>{
         e.persist();
         this.setState({form:{...this.state.form, [e.target.name]: e.target.value}})
@@ -37,7 +31,7 @@ class Admin extends React.Component {
 
     render() {
         const { user, users } = this.props;
-        const { loading } = this.state;
+        //const { loading } = this.state;
         if ( !user || !users.data ) return null;
         
        
@@ -69,7 +63,7 @@ class Admin extends React.Component {
         return (
             <article className='container'>
                 <h3 className='mt-3'>Admin</h3>
-                <TableUsers users={this.state.usersAdmin} modal={this.state.modal} toggleModal={this.toggleModal} />
+                <TableUsers users={this.state.usersAdmin} />
             </article>
         );
         

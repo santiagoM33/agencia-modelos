@@ -11,7 +11,7 @@ class Users extends React.Component {
                     <td>{user.roleId}</td>
                     <td>{user.status}</td>
                     <td className='text-center'>
-                        <Pencil modal={modal} toggleModal={this.props.toggleModal} />
+                        <Pencil userId={user.id}/>
                     </td>
                 </tr>
             </>

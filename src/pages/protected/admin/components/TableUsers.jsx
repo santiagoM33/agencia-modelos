@@ -3,9 +3,9 @@ import Users from './Users';
 
 class TableUsers extends React.Component {
     render() {
-        const { users, modal } = this.props;
+        const { users } = this.props;
         return (
-            <table class="table table-striped">
+            <table className="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
@@ -16,7 +16,7 @@ class TableUsers extends React.Component {
                 </thead>
                 <tbody>
                     {users.map(user=> (
-                        <Users  key={user.id} user={user} modal={modal} toggleModal={this.props.toggleModal} />
+                        <Users key={user.id} user={user} />
                     )) }
                     
                 </tbody>
