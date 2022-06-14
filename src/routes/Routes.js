@@ -6,10 +6,11 @@ import Home from '../pages/home/Home';
 import ResetPasswordRequest from '../pages/ResetPasswordRequest';
 import ResetPassword from '../pages/ResetPassword';
 import 'bootstrap/dist/css/bootstrap.css';
-import { getEscorts, getUsers } from '../services/connect';
+import { getEscorts, getServices, getUsers } from '../services/connect';
 import EditUsers from '../pages/protected/admin/pages/EditUsers';
 //import UserProfile from '../pages/home/components/UserProfile';
 import Catalog from '../pages/protected/catalog/Catalog';
+import TableServices from '../pages/protected/admin/components/TableServices';
 const Profile = React.lazy(() => import('../pages/protected/profile/Profile.protected'));
 const Login = React.lazy(() => import('../pages/login/Login'));
 const Register = React.lazy(() => import('../pages/register/Register'));
@@ -30,7 +31,8 @@ class Routes extends React.Component {
             user,
             token,
             users: [],
-            models: []
+            models: [],
+            services: []
          }
     }
 
@@ -39,6 +41,7 @@ class Routes extends React.Component {
     componentDidMount(){
         getUsers(this.controller.signal).then(res=>this.setState({users: res}))
         getEscorts(this.controller.signal).then(res=>this.setState({models: res}))
+        getServices(this.controller.signal).then(res=>this.setState({services: res}))
     }
     
 
@@ -55,7 +58,7 @@ class Routes extends React.Component {
     //componentWillUnmount(){this.controller.abort()}
 
     render() { 
-        const {user, users, models} = this.state;
+        const {user, users, models, services} = this.state;
         
         return ( 
             <BrowserRouter>
@@ -122,6 +125,12 @@ class Routes extends React.Component {
                             <PrivateRoute exact path="/catalog" authed={!!user} component={ privateProps => (
                                 <Catalog {...privateProps}/>
                             )}                    
+                            />
+                            <PrivateRoute exact path="/services" authed={!!user} component={ privateProps => (
+                                <TableServices {...privateProps}
+                                    services={services}
+                                />
+                            )}
                             />
                             <PrivateRoute exact path="/users/:userId" authed={!!user} component={ privateProps => (
                                 <EditUsers {...privateProps}

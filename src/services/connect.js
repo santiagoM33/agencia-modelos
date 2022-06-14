@@ -371,6 +371,30 @@ export const getUsersById = async id => {
     return promise;
 }
 
+export const getUsersPagination = async (limit, offset) => {
+    const requestData = {
+        method: 'GET', 
+        headers: new Headers({
+            'Authorization': `Bearer ${accessToken}`, 
+        })
+        
+    }
+    const promise = new Promise(async (response, reject) => {
+        try{
+            const res = await fetch(`${BASE_URI}/users?limit=${limit}&offset=${offset}`, requestData)
+            const body = await res.json();
+                if (res !== 0) {
+                    return response(body)
+                } else {
+                    return reject(body)
+                }
+        } catch (err) {
+            reject({errors: [err]})
+        }
+    })
+    return promise;
+}
+
 
 /* -------------------------- DELETE ------------------------------ */
 /* -------------------------- DELETE ------------------------------ */

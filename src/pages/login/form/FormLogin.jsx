@@ -88,7 +88,7 @@ class FormLogin extends React.Component {
                 </div>
                 <div className='col-12'>
                     <div className="form-group">
-                        <button type='submit' className='btn btn-primary btn-block' onClick={this.onHandleSubmit}>Signin</button>
+                        <button type='submit' className='btn btn-primary btn-block'>Signin</button>
                     </div>
                 </div>
             </form>

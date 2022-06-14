@@ -50,10 +50,9 @@ class EditUsers extends React.Component {
         const { form } = this.state;
         const { data } = this.props.users;
         if (!data) return null;
-        //const { id, alias, email, status, roleId } = form;
+        
         const { userId } = this.props.match.params;
         const USER = data.find(el => el.id === Number(userId))
-        console.log('User: ', USER)
         return (
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">

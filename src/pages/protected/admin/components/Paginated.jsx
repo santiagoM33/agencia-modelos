@@ -3,22 +3,35 @@ import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 const Paginated = props => {
     
+    const {currentPage, totalPages, onPageChange} = props;
+
+    const nextPage = () => {
+      if(currentPage === totalPages) return null;
+      currentPage+=1;
+      let offset = (currentPage - 1) * 10;
+      onPageChange(currentPage, offset)
+    }
+
+    const prevPage = () => {
+      if(currentPage === 1) return null;
+      currentPage -= 1;
+      onPageChange(currentPage)
+    }
+
 
     return (
-      <Pagination aria-label="Page navigation status" className='offset-1 offset-sm-2 col-sm offset-md-4'>
+      <Pagination aria-label="Page navigation status" className='offset-4 offset-md-10 col-sm'>
         <PaginationItem>
-          <PaginationLink previous href="#"/>
+          <PaginationLink previous href="#" onClick={()=>prevPage}/>
         </PaginationItem>
-        {/*Object.keys(pages).map((data, key)=>{
-          return <PaginationItem key={key}>
-                  <PaginationLink href="#" onClick={()=>paginate(data)}>
-                    {Number(data)}
-                  </PaginationLink>
-                </PaginationItem>
-        })*/}
         <PaginationItem>
-          <PaginationLink next href="#"/>
+            <PaginationLink href="#">
+                {currentPage}
+            </PaginationLink>     
         </PaginationItem>
+        <PaginationItem>
+        <PaginationLink next href="#" onClick={()=>nextPage}/>
+      </PaginationItem>
       </Pagination>
     );
   }

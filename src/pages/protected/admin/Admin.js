@@ -1,22 +1,24 @@
 import React from 'react';
 import './Admin.css';
-import { getUsers } from '../../../services/connect';
+import { getUsers, getUsersPagination } from '../../../services/connect';
 import TableUsers from './components/TableUsers';
+import Paginated from './components/Paginated';
 
 class Admin extends React.Component {
     state = {
         currentPage: 1,
-        postPerPage: 5,
-        totalPages: 0,
+        limit: 5,
+        offset: 0,
         totalItems: 0,
         loading: true,
-        usersAdmin: []
+        usersAdmin: [],
+        pagesRemaining: 0
     }
 
     controller = new AbortController();
     
     componentDidMount(){
-        getUsers(this.controller.signal).then(res=>this.setState({usersAdmin: res.data, loading: false}))
+        getUsersPagination(this.state.limit, this.state.offset).then(res=>this.setState({usersAdmin: res.data, loading: false, pagesRemaining: res.pagesRemaining}))
     }
 
     handleChange = e =>{
@@ -29,41 +31,33 @@ class Admin extends React.Component {
     //Verificar como mejorar esto
     //componentWillUnmount(){this.controller.abort()}
 
+
+    onPageChange = (currentPage, offset) => this.setState({currentPage, offset})
+
     render() {
         const { user, users } = this.props;
         //const { loading } = this.state;
         if ( !user || !users.data ) return null;
         
-       
+       console.log('Pages', this.state.pages)
 
         /* PAGINATION */
-       
-
-        /*const paginate = pageNum => this.setState({currentPage: pageNum})
-        const nextPage = () => {
-            let currentPage = Number(this.state.currentPage);
-            const {totalPages} = this.state;
-            if(currentPage === totalPages) return null;
-            currentPage+=1;
-            this.setState({currentPage}, () =>{
-                getUsers(this.controller.signal).then(res=>this.setState({Users: res}))
-            })
-        }
-        const prevPage = () => {
-            let currentPage = Number(this.state.currentPage);
-            if(currentPage === 1) return null;
-            currentPage -= 1;
-            this.setState({currentPage}, () => {
-                getUsers(this.controller.signal).then(res=>this.setState({Users: res}))
-            })
-        }*/
+          
+            const {currentPage, pagesRemaining, pages} = this.state;
+            if (!pages) return null;
+            let totalPages = currentPage + pagesRemaining;
 
         /*----------------------- */
-        /*----------------------- */        
+        /*----------------------- */   
         return (
             <article className='container'>
                 <h3 className='mt-3'>Admin</h3>
                 <TableUsers users={this.state.usersAdmin} />
+                <Paginated
+                    onPageChange={this.onPageChange} 
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                />
             </article>
         );
         
