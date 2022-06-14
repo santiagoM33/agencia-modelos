@@ -39,12 +39,11 @@ class Admin extends React.Component {
         //const { loading } = this.state;
         if ( !user || !users.data ) return null;
         
-       console.log('Pages', this.state.pages)
+       console.log('Pages', this.state.pagesRemaining)
 
         /* PAGINATION */
           
-            const {currentPage, pagesRemaining, pages} = this.state;
-            if (!pages) return null;
+            const {currentPage, pagesRemaining} = this.state;
             let totalPages = currentPage + pagesRemaining;
 
         /*----------------------- */
