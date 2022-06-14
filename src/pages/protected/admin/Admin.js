@@ -7,18 +7,18 @@ import Paginated from './components/Paginated';
 class Admin extends React.Component {
     state = {
         currentPage: 1,
-        limit: 5,
         offset: 0,
-        totalItems: 0,
+        itemsRemaining: 0,
+        pagesRemaining: 0,
         loading: true,
-        usersAdmin: [],
-        pagesRemaining: 0
+        usersAdmin: []
     }
 
     controller = new AbortController();
     
     componentDidMount(){
-        getUsersPagination(this.state.limit, this.state.offset).then(res=>this.setState({usersAdmin: res.data, loading: false, pagesRemaining: res.pagesRemaining}))
+        const limit = 5;
+        getUsersPagination(limit, this.state.offset).then(res=>this.setState({usersAdmin: res.data, loading: false, pagesRemaining: res.pagesRemaining, itemsRemaining: res.itemsRemaining}))
     }
 
     handleChange = e =>{
@@ -39,7 +39,9 @@ class Admin extends React.Component {
         //const { loading } = this.state;
         if ( !user || !users.data ) return null;
         
-       console.log('Pages', this.state.pagesRemaining)
+       /*console.log('pagesRemaining', this.state.pagesRemaining)
+       console.log('itemsRemaining', this.state.itemsRemaining)*/
+       console.log('offset', this.state.offset)
 
         /* PAGINATION */
           

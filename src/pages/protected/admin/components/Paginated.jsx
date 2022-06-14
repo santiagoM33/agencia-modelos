@@ -7,17 +7,15 @@ const Paginated = props => {
 
     const nextPage = () => {
       if(currentPage === totalPages) return null;
-      console.log('CurrentPage: ', currentPage)
-      console.log('TotalPage: ', totalPages)
       currentPage+=1;
-      let offset = (currentPage - 1) * 10;
+      let offset = (currentPage - 1) * 5;
       onPageChange(currentPage, offset)
     }
 
     const prevPage = () => {
       if(currentPage === 1) return null;
       currentPage-=1;
-      let offset = (currentPage + 1) * 10;
+      let offset = (currentPage - 1) * 5;
       onPageChange(currentPage, offset)
     }
 
